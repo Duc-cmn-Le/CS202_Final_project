@@ -27,49 +27,189 @@ class Attribute {
 public:
     virtual std::string getName() = 0;
     virtual void setValue(char* attr_value) = 0;
+    virtual void what_is_this() = 0;
+};
+
+class X : public Attribute {
+private:
+    int value;
+public:
+    std::string getName();
+    void setValue(char* attr_value);
+    void what_is_this();
+};
+
+class Y : public Attribute {
+private:
+    int value;
+public:
+    std::string getName();
+    void setValue(char* attr_value);
+    void what_is_this();
+};
+
+class X1 : public Attribute {
+private:
+    int value;
+public:
+    std::string getName();
+    void setValue(char* attr_value);
+    void what_is_this();
+};
+
+class Y1 : public Attribute {
+private:
+    int value;
+public:
+    std::string getName();
+    void setValue(char* attr_value);
+    void what_is_this();
+};
+
+class X2 : public Attribute {
+private:
+    int value;
+public:
+    std::string getName();
+    void setValue(char* attr_value);
+    void what_is_this();
+};
+
+class Y2 : public Attribute {
+private:
+    int value;
+public:
+    std::string getName();
+    void setValue(char* attr_value);
+    void what_is_this();
+};
+
+class Cx : public Attribute {
+private:
+    int value;
+public:
+    std::string getName();
+    void setValue(char* attr_value);
+    void what_is_this();
+};
+
+class Cy : public Attribute {
+private:
+    int value;
+public:
+    std::string getName();
+    void setValue(char* attr_value);
+    void what_is_this();
+};
+
+class R : public Attribute {
+private:
+    int value;
+public:
+    std::string getName();
+    void setValue(char* attr_value);
+    void what_is_this();
+};
+
+class Rx : public Attribute {
+private:
+    int value;
+public:
+    std::string getName();
+    void setValue(char* attr_value);
+    void what_is_this();
+};
+
+class Ry : public Attribute {
+private:
+    int value;
+public:
+    std::string getName();
+    void setValue(char* attr_value);
+    void what_is_this();
+};
+
+class Height : public Attribute {
+private:
+    int value;
+public:
+    Height() : value(0) {}
+    std::string getName();
+    void setValue(char* attr_value);
+    void what_is_this();
+};
+
+class Width : public Attribute {
+private:
+    int value;
+public:
+    Width() : value(0) {}
+    std::string getName();
+    void setValue(char* attr_value);
+    void what_is_this();
 };
 
 class Fill : public Attribute {
 private:
     Color value;
 public:
+    Fill() : value(Color(255, 255, 255)) {}
     std::string getName();
     void setValue(char* attr_value);
+    void what_is_this();
 };
 
 class Fill_opacity : public Attribute {
 private:
     double value;
 public:
+    Fill_opacity() : value(1) {}
     std::string getName();
     void setValue(char* attr_value);
-
+    void what_is_this();
 };
 
 class Stroke : public Attribute {
 private: 
     Color value;
 public:
+    Stroke() : value(Color(0, 0, 0)) {}
     std::string getName();
     void setValue(char* attr_value);
+    void what_is_this();
 };
 
 class Stroke_width : public Attribute {
 private:
     int value;
 public:
+    Stroke_width() : value(0) {}
     std::string getName();
     void setValue(char* attr_value);
+    void what_is_this();
 };
 
 class Stroke_opacity : public Attribute {
 private:
     double value;
 public:
+    Stroke_opacity() : value(1) {}
     std::string getName();
     void setValue(char* attr_value);
+    void what_is_this();
 };
 
+
+class Point {
+private:
+    int x, y;
+public:
+    Point ();
+    Point (int x, int y);
+    Point (const Point& p);
+    Point& operator= (const Point& p);
+    void set_point (int x, int y);
+};
 
 class Shape{
 protected:
@@ -95,17 +235,8 @@ public:
 
     void setAttribute(char* attr_name, char* attr_value);
     void input(rapidxml::xml_node<>* object_node);
-};
 
-class Point {
-private:
-    int x, y;
-public:
-    Point ();
-    Point (int x, int y);
-    Point (const Point& p);
-    Point& operator= (const Point& p);
-    void set_point (int x, int y);
+    virtual void what_is_this() = 0;
 };
 
 class Line : public Shape{
@@ -119,6 +250,7 @@ public:
     Line ();
     Line (const Line& l);
     Line& operator= (const Line& l);
+    void what_is_this();
 };
 
 class Rectangle : public Shape{
@@ -135,6 +267,7 @@ public:
     Rectangle ();
     Rectangle (const Rectangle& r);
     Rectangle& operator= (const Rectangle& r);
+    void what_is_this();
 };
 
 class Circle : public Shape{
@@ -150,6 +283,7 @@ public:
     Circle ();
     Circle (const Circle& c);
     Circle& operator= (const Circle& c);
+    void what_is_this();
 };
 
 class Ellipse : public Shape{
@@ -166,6 +300,7 @@ public:
     Ellipse ();
     Ellipse (const Ellipse& e);
     Ellipse& operator= (const Ellipse& e);
+    void what_is_this();
 };
 
 class Polyline : public Shape{
@@ -179,6 +314,7 @@ public:
     Polyline ();
     Polyline (const Polyline& p);
     Polyline& operator= (const Polyline& p);
+    void what_is_this();
 };
 
 class Polygon : public Shape{
@@ -192,22 +328,32 @@ public:
     Polygon ();
     Polygon (const Polygon& p);
     Polygon& operator= (const Polygon& p);
+    void what_is_this();
 };
 
 class Text : public Shape {
 
+public:
+
+    void what_is_this();
 };
 
 class Path : public Shape {
 
+public:
+
+    void what_is_this();
 };
 
 class Group : public Shape {
 
+public:
+
+    void what_is_this();
 };
 
 namespace etc{
     Color atoc(char* c);
 }
 
-void inputFromFile(std::vector<Shape*> &_shape);
+void inputFromFile(std::vector<Shape*> &_shape, std::string filename);

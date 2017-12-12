@@ -13,7 +13,176 @@ std::ostream& operator<< (std::ostream& os, const Color& c) {
 }
 // - - - - - - 
 // Attribute define
-//
+
+// - - - - - - 
+// X define
+std::string X:: getName() {
+    return "x";
+}
+
+void X:: setValue(char* attr_value) {
+    this->value = atoi(attr_value);
+}
+
+void X:: what_is_this() {
+    std::cout << "x=" << value << ' ';
+}
+// - - - - - -
+// Y define
+std::string Y:: getName() {
+    return "y";
+}
+
+void Y:: setValue(char* attr_value) {
+    this->value = atoi(attr_value);
+}
+
+void Y:: what_is_this() {
+    std::cout << "y=" << value << ' ';
+}
+// - - - - - -
+// X1 define
+std::string X1:: getName() {
+    return "x1";
+}
+
+void X1:: setValue(char* attr_value) {
+    this->value = atoi(attr_value);
+}
+
+void X1:: what_is_this() {
+    std::cout << "x1=" << value << ' ';
+}
+// - - - - - -
+// Y1 define
+std::string Y1:: getName() {
+    return "y1";
+}
+
+void Y1:: setValue(char* attr_value) {
+    this->value = atoi(attr_value);
+}
+
+void Y1:: what_is_this() {
+    std::cout << "y1=" << value << ' ';
+}
+// - - - - - -
+// X2 define
+std::string X2:: getName() {
+    return "x2";
+}
+
+void X2:: setValue(char* attr_value) {
+    this->value = atoi(attr_value);
+}
+
+void X2:: what_is_this() {
+    std::cout << "x2=" << value << ' ';
+}
+// - - - - - -
+// Y2 define
+std::string Y2:: getName() {
+    return "y2";
+}
+
+void Y2:: setValue(char* attr_value) {
+    this->value = atoi(attr_value);
+}
+
+void Y2:: what_is_this() {
+    std::cout << "y2=" << value << ' ';
+}
+// - - - - - -
+// Cx define
+std::string Cx:: getName() {
+    return "cx";
+}
+
+void Cx:: setValue(char* attr_value) {
+    this->value = atoi(attr_value);
+}
+
+void Cx:: what_is_this() {
+    std::cout << "cx=" << value << ' ';
+}
+// - - - - - -
+// Cy define
+std::string Cy:: getName() {
+    return "cy";
+}
+
+void Cy:: setValue(char* attr_value) {
+    this->value = atoi(attr_value);
+}
+
+void Cy:: what_is_this() {
+    std::cout << "cy=" << value << ' ';
+}
+// - - - - - -
+// R define
+std::string R:: getName() {
+    return "r";
+}
+
+void R:: setValue(char* attr_value) {
+    this->value = atoi(attr_value);
+}
+
+void R:: what_is_this() {
+    std::cout << "r=" << value << ' ';
+}
+// - - - - - -
+// Rx define
+std::string Rx:: getName() {
+    return "rx";
+}
+
+void Rx:: setValue(char* attr_value) {
+    this->value = atoi(attr_value);
+}
+
+void Rx:: what_is_this() {
+    std::cout << "rx=" << value << ' ';
+}
+// - - - - - -
+// Ry define
+std::string Ry:: getName() {
+    return "ry";
+}
+
+void Ry:: setValue(char* attr_value) {
+    this->value = atoi(attr_value);
+}
+
+void Ry:: what_is_this() {
+    std::cout << "ry=" << value << ' ';
+}
+// - - - - - -
+// Height define
+std::string Height:: getName() {
+    return "height";
+}
+
+void Height:: setValue(char* attr_value) {
+    this->value = atoi(attr_value);
+}
+
+void Height:: what_is_this() {
+    std::cout << "height=" << value << ' ';
+}
+// - - - - - - 
+// Weight define
+std::string Width:: getName() {
+    return "width";
+}
+
+void Width:: setValue(char* attr_value) {
+    this->value = atoi(attr_value);
+}
+
+void Width:: what_is_this() {
+    std::cout << "width=" << value << ' ';
+}
 // - - - - - - 
 // Fill define
 std::string Fill:: getName() {
@@ -22,6 +191,10 @@ std::string Fill:: getName() {
 
 void Fill:: setValue(char* attr_value) {
     this->value = etc::atoc(attr_value);
+}
+
+void Fill:: what_is_this() {
+    std::cout << "fill=" << value << ' ';
 }
 // - - - - - - 
 // Fill_opacity define
@@ -32,6 +205,10 @@ std::string Fill_opacity:: getName() {
 void Fill_opacity:: setValue(char* attr_value) {
     this->value = atof(attr_value);
 }
+
+void Fill_opacity:: what_is_this() {
+    std::cout << "fill-opacity=" << value << ' ';
+}
 // - - - - - - 
 // Stroke define
 std::string Stroke:: getName() {
@@ -40,6 +217,10 @@ std::string Stroke:: getName() {
 
 void Stroke:: setValue(char* attr_value) {
     this->value = etc::atoc(attr_value);
+}
+
+void Stroke:: what_is_this() {
+    std::cout << "stroke=" << value << ' ';
 }
 // - - - - - - 
 // Stroke_width define
@@ -50,6 +231,10 @@ std::string Stroke_width:: getName() {
 void Stroke_width:: setValue(char* attr_value) {
     this->value = atoi(attr_value);
 }
+
+void Stroke_width:: what_is_this() {
+    std::cout << "stroke-width=" << value << ' ';
+}
 // - - - - - - 
 // Stroke_opacity define
 std::string Stroke_opacity:: getName() {
@@ -59,7 +244,38 @@ std::string Stroke_opacity:: getName() {
 void Stroke_opacity:: setValue(char* attr_value) {
     this->value = atof(attr_value);
 }
+
+void Stroke_opacity:: what_is_this() {
+    std::cout << "stroke-opacity=" << value << ' ';
+}
 // - - - - - - 
+// Point define
+Point:: Point () {
+    x = 0; 
+    y = 0;
+}
+
+Point:: Point (int x, int y) {
+    this->x = x;
+    this->y = y;
+}
+
+Point:: Point (const Point& p) {
+    this->x = p.x;
+    this->y = p.y;
+}
+
+Point& Point:: operator= (const Point& p) {
+    this->x = p.x;
+    this->y = p.y;
+    return *this;
+}
+
+void Point:: set_point (int x, int y) {
+    this->x = x;
+    this->y = y;
+}
+// - - - - - - -
 // Shape define
 Shape& Shape:: operator= (const Shape& s) {
     this->stroke = s.stroke;
@@ -119,40 +335,24 @@ void Shape:: setAttribute(char* attr_name, char* attr_value) {
     }
 }
 
-void Shape:: input(rapidxml::xml_node<>* object_node) {
+void Shape:: input(rapidxml::xml_node<>* node) {
+    for (rapidxml::xml_attribute<> *attr = node->first_attribute(); attr; attr = attr->next_attribute())
+        this->setAttribute(attr->name(), attr->value());
+}
 
+void Shape:: what_is_this() {
+    std::cout << '\t';
+    for (int i=0, size=attributes.size(); i < size; i++)
+        attributes[i]->what_is_this();
+    std::cout << '\n';
 }
 // - - - - - - - 
-// Point define
-Point:: Point () {
-    x = 0; 
-    y = 0;
-}
-
-Point:: Point (int x, int y) {
-    this->x = x;
-    this->y = y;
-}
-
-Point:: Point (const Point& p) {
-    this->x = p.x;
-    this->y = p.y;
-}
-
-Point& Point:: operator= (const Point& p) {
-    this->x = p.x;
-    this->y = p.y;
-    return *this;
-}
-
-void Point:: set_point (int x, int y) {
-    this->x = x;
-    this->y = y;
-}
-
-// - - - - - - -
 // Line define
 Line:: Line () {
+    attributes.push_back(new X1);
+    attributes.push_back(new Y1);
+    attributes.push_back(new X2);
+    attributes.push_back(new Y2);
     attributes.push_back(new Stroke);
     attributes.push_back(new Stroke_width);
     attributes.push_back(new Stroke_opacity);
@@ -179,9 +379,18 @@ Line& Line:: operator= (const Line& l) {
     this->attributes = l.attributes;
     return *this;
 }
+
+void Line:: what_is_this() {
+    std::cout << "This is a Line " << '\n';
+    Shape::what_is_this();
+}
 // - - - - - - -
 // Rectangle define
 Rectangle:: Rectangle () {
+    attributes.push_back(new X);
+    attributes.push_back(new Y);
+    attributes.push_back(new Width);
+    attributes.push_back(new Height);
     attributes.push_back(new Fill);
     attributes.push_back(new Fill_opacity);
     attributes.push_back(new Stroke);
@@ -216,9 +425,17 @@ Rectangle& Rectangle:: operator= (const Rectangle& r) {
     this->attributes = r.attributes;
     return *this;
 }
+
+void Rectangle:: what_is_this() {
+    std::cout << "This is a Rectangle " << '\n';
+    Shape::what_is_this();
+}
 // - - - - - - -
 // Circle define
 Circle:: Circle () {
+    attributes.push_back(new Cx);
+    attributes.push_back(new Cy);
+    attributes.push_back(new R);
     attributes.push_back(new Fill);
     attributes.push_back(new Fill_opacity);
     attributes.push_back(new Stroke);
@@ -251,9 +468,18 @@ Circle& Circle:: operator= (const Circle& c) {
     this->attributes = c.attributes;
     return *this;
 }
+
+void Circle:: what_is_this() {
+    std::cout << "This is a Circle " << '\n';
+    Shape::what_is_this();
+}
 // - - - - - - -
 // Ellipse define
 Ellipse:: Ellipse () {
+    attributes.push_back(new Cx);
+    attributes.push_back(new Cy);
+    attributes.push_back(new Rx);
+    attributes.push_back(new Ry);
     attributes.push_back(new Fill);
     attributes.push_back(new Fill_opacity);
     attributes.push_back(new Stroke);
@@ -288,6 +514,11 @@ Ellipse& Ellipse:: operator= (const Ellipse& e) {
     this->attributes = e.attributes;
     return *this;
 }
+
+void Ellipse:: what_is_this() {
+    std::cout << "This is a Ellipse " << '\n';
+    Shape::what_is_this();
+}
 // - - - - - - -
 // Polyline define
 Polyline:: Polyline () {
@@ -320,6 +551,11 @@ Polyline& Polyline:: operator= (const Polyline& p) {
     this->fill_opacity = p.fill_opacity;
     this->attributes = p.attributes;
     return *this;
+}
+
+void Polyline:: what_is_this() {
+    std::cout << "This is a Polyline " << '\n';
+    Shape::what_is_this();
 }
 // - - - - - - -
 // Polygon define
@@ -354,7 +590,33 @@ Polygon& Polygon:: operator= (const Polygon& p) {
     this->attributes = p.attributes;
     return *this;
 }
+
+void Polygon:: what_is_this() {
+    std::cout << "This is a Polygon " << '\n';
+    Shape::what_is_this();
+}
 // - - - - - - -
+// Text define
+
+void Text:: what_is_this() {
+    std::cout << "This is a Text " << '\n';
+    Shape::what_is_this();
+}
+// - - - - - - 
+// Path
+
+void Path:: what_is_this() {
+    std::cout << "This is a Path " << '\n';
+    Shape::what_is_this();
+}
+// - - - - - - 
+// Group
+
+void Group:: what_is_this() {
+    std::cout << "This is a Group " << '\n';
+    Shape::what_is_this();
+}
+// - - - - - - 
 // etc define
 Color etc::atoc(char* c) {
     int t[3] = {0, 0, 0}, j = 0;
@@ -369,12 +631,12 @@ Color etc::atoc(char* c) {
     return Color(t[0], t[1], t[2]);
 }
 // - - - - - - - 
-void inputFromFile(std::vector<Shape*> &_shape)
+void inputFromFile(std::vector<Shape*> &_shape, std::string filename)
 {
     //cout << "Parsing the file ......." << endl;
     rapidxml::xml_document<> doc;
     rapidxml::xml_node<> * root_node;
-    std::ifstream theFile("line.svg");
+    std::ifstream theFile(filename);
     std::vector<char> buffer((std::istreambuf_iterator<char>(theFile)), std::istreambuf_iterator<char>());
     buffer.push_back('\0');
     doc.parse<0>(&buffer[0]);
@@ -398,10 +660,10 @@ void inputFromFile(std::vector<Shape*> &_shape)
             nw = new Ellipse;
         else if (stmp == "text")
             nw = new Text;
-        else if (stmp == "g")
-            nw = new Group;
-        else if (stmp == "path")
-            nw = new Path;
+        /* else if (stmp == "g") */
+            /* nw = new Group; */
+        /* else if (stmp == "path") */
+            /* nw = new Path; */
         if (nw != NULL) 
         {
             nw->input(object_node);
