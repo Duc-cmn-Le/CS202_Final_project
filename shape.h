@@ -1,36 +1,13 @@
-#pragma once
 #include <iostream>
 #include <fstream>
 #include <cstring>
 #include <string>
 #include <vector>
 #include <cmath>
+#include "rapidxml/rapidxml.hpp"
+
 
 typedef float Type;
-
-class Attribute {
-
-};
-
-class Fill : public Attribute {
-
-};
-
-class Fill_opacity : public Attribute {
-
-};
-
-class Stroke : public Attribute {
-
-};
-
-class Stroke_width : public Attribute {
-
-};
-
-class Stroke_opacity : public Attribute {
-
-};
 
 class Color{
 private:
@@ -39,28 +16,85 @@ public:
     Color ();
     Color (int r, int g, int b);
     Color (const Color &C);
+    friend std::ostream& operator<< (std::ostream& os, const Color& c);
 };
+
+std::ostream& operator<< (std::ostream& os, const Color& c);
+
+
+class Attribute {
+
+public:
+    virtual std::string getName() = 0;
+    virtual void setValue(char* attr_value) = 0;
+};
+
+class Fill : public Attribute {
+private:
+    Color value;
+public:
+    std::string getName();
+    void setValue(char* attr_value);
+};
+
+class Fill_opacity : public Attribute {
+private:
+    double value;
+public:
+    std::string getName();
+    void setValue(char* attr_value);
+
+};
+
+class Stroke : public Attribute {
+private: 
+    Color value;
+public:
+    std::string getName();
+    void setValue(char* attr_value);
+};
+
+class Stroke_width : public Attribute {
+private:
+    int value;
+public:
+    std::string getName();
+    void setValue(char* attr_value);
+};
+
+class Stroke_opacity : public Attribute {
+private:
+    double value;
+public:
+    std::string getName();
+    void setValue(char* attr_value);
+};
+
 
 class Shape{
 protected:
-    Color stroke;
-    Color fill;
+    Stroke stroke;
+    Fill fill;
     Stroke_width stroke_width;
     Stroke_opacity stroke_opacity;
     Fill_opacity fill_opacity;
+    std::vector< Attribute*> attributes;
 public:
 
     Shape& operator= (const Shape& s);
-    Color get_stroke ();
-    Color get_fill ();
-    Type get_stroke_width ();
-    Type get_stroke_opacity ();
-    Type get_fill_opacity ();
-    void set_stroke (Color stroke);
-    void set_fill (Color fill);
+    Stroke get_stroke ();
+    Fill get_fill ();
+    Stroke_width get_stroke_width ();
+    Stroke_opacity get_stroke_opacity ();
+    Fill_opacity get_fill_opacity ();
+    void set_stroke (Stroke stroke);
+    void set_fill (Fill fill);
     void set_stroke_width (Stroke_width stroke_width);
-    void set_stroke_opacity (Type stroke_opacity);
-    void set_fill_opacity (Type fill_opacity);
+    void set_stroke_opacity (Stroke_opacity stroke_opacity);
+    void set_fill_opacity (Fill_opacity fill_opacity);
+
+    void setAttribute(char* attr_name, char* attr_value);
+    void input(rapidxml::xml_node<>* object_node);
 };
 
 class Point {
@@ -76,9 +110,9 @@ public:
 
 class Line : public Shape{
 private:
-    // Point p1, p2
-    // Color stroke
-    // Type stroke_width, stroke_opacity
+    // p1, p2
+    // stroke
+    // stroke_width, stroke_opacity
     Point p1, p2; 
     // transform
 public:
@@ -89,10 +123,10 @@ public:
 
 class Rectangle : public Shape{
 private:
-    // Point p
-    // Type width, height
-    // Color stroke, fill
-    // Type stroke_width, stroke_opacity, fill_opacity
+    // p
+    // width, height
+    // stroke, fill
+    // stroke_width, stroke_opacity, fill_opacity
     Point p;
     Type width;
     Type height;
@@ -105,10 +139,10 @@ public:
 
 class Circle : public Shape{
 private:
-    // Point c
-    // Type r
-    // Color stroke, fill
-    // Type stroke_width, stroke_opacity, fill_opacity
+    // c
+    // r
+    // stroke, fill
+    // stroke_width, stroke_opacity, fill_opacity
     Point c;
     Type r;
     // transform
@@ -120,10 +154,10 @@ public:
 
 class Ellipse : public Shape{
 private:
-    // Point c
-    // Type rx, ry
-    // Color stroke, fill
-    // Type stroke_width, stroke_opacity, fill_opacity
+    // c
+    // rx, ry
+    // stroke, fill
+    // stroke_width, stroke_opacity, fill_opacity
     Point c;
     Type rx;
     Type ry;
@@ -137,8 +171,8 @@ public:
 class Polyline : public Shape{
 private:
     // vector<Point> points
-    // Color stroke, fill
-    // Type stroke_width, stroke_opacity, fill_opacity
+    // stroke, fill
+    // stroke_width, stroke_opacity, fill_opacity
     std::vector<Point> points;
     // transform
 public:
@@ -150,8 +184,8 @@ public:
 class Polygon : public Shape{
 private:
     // vector<Point> points
-    // Color stroke, fill
-    // Type stroke_width, stroke_opacity, fill_opacity
+    // stroke, fill
+    // stroke_width, stroke_opacity, fill_opacity
     std::vector<Point> points;
     // transform
 public:  
@@ -159,3 +193,21 @@ public:
     Polygon (const Polygon& p);
     Polygon& operator= (const Polygon& p);
 };
+
+class Text : public Shape {
+
+};
+
+class Path : public Shape {
+
+};
+
+class Group : public Shape {
+
+};
+
+namespace etc{
+    Color atoc(char* c);
+}
+
+void inputFromFile(std::vector<Shape*> &_shape);
