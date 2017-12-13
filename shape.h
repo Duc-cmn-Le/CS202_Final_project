@@ -316,7 +316,7 @@ private:
     std::vector<MyPoint> value; 
 public:
     std::string getName();
-    void setValue(char* attr_value, Shapedata &data);
+    void setValue(char * attr_value, Shapedata &data);
     std::vector<MyPoint> getValue();
     void what_is_this();
 };
@@ -336,6 +336,7 @@ public:
     void show_linker_data();
 
     virtual void what_is_this() = 0;
+    virtual void draw(HDC hdc) = 0;
 };
 
 class MyLine : public Shape{
@@ -350,6 +351,7 @@ public:
     MyLine (const MyLine& l);
     MyLine& operator= (const MyLine& l);
     void what_is_this();
+    void draw(HDC hdc);
 };
 
 class MyRectangle : public Shape{
@@ -367,6 +369,7 @@ public:
     MyRectangle (const MyRectangle& r);
     MyRectangle& operator= (const MyRectangle& r);
     void what_is_this();
+    void draw(HDC hdc);
 };
 
 class MyCircle : public Shape{
@@ -383,6 +386,7 @@ public:
     MyCircle (const MyCircle& c);
     MyCircle& operator= (const MyCircle& c);
     void what_is_this();
+    void draw(HDC hdc);
 };
 
 class MyEllipse : public Shape{
@@ -400,6 +404,7 @@ public:
     MyEllipse (const MyEllipse& e);
     MyEllipse& operator= (const MyEllipse& e);
     void what_is_this();
+    void draw(HDC hdc);
 };
 
 class MyPolyline : public Shape{
@@ -414,6 +419,7 @@ public:
     MyPolyline (const MyPolyline& p);
     MyPolyline& operator= (const MyPolyline& p);
     void what_is_this();
+    void draw(HDC hdc);
 };
 
 class MyPolygon : public Shape{
@@ -428,15 +434,17 @@ public:
     MyPolygon (const MyPolygon& p);
     MyPolygon& operator= (const MyPolygon& p);
     void what_is_this();
+    void draw(HDC hdc);
 };
 
 class MyText : public Shape {
-private: 
+
 public:
     MyText();
     MyText(const MyText& t);
     MyText& operator= (const MyText& t);
     void what_is_this();
+    void draw(HDC hdc);
 };
 
 class Path : public Shape {
@@ -444,6 +452,7 @@ class Path : public Shape {
 public:
 
     void what_is_this();
+    void draw(HDC hdc);
 };
 
 class Group : public Shape {
@@ -451,6 +460,7 @@ class Group : public Shape {
 public:
 
     void what_is_this();
+    void draw(HDC hdc);
 };
 
 class Database{

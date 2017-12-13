@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "shape.h"
 // MyPoint define
 MyPoint:: MyPoint () {
@@ -459,6 +460,30 @@ void MyLine:: what_is_this() {
     std::cout << "This is a MyLine " << '\n';
     Shape::what_is_this();
 }
+
+void MyLine:: draw(HDC hdc) {
+    Graphics graphics(hdc);
+
+    // Create a Pen object
+    int re = this->sdata.get_stroke().red();
+    int gr = this->sdata.get_stroke().green();
+    int bl = this->sdata.get_stroke().blue();
+    Color col = Color(this->sdata.get_stroke_opacity() * 255, re, gr, bl);
+    Pen pen(col, 1.0*this->sdata.get_stroke_width());
+
+    // Define
+    int x1 = this->sdata.get_x1();
+    int y1 = this->sdata.get_y1();
+    int x2 = this->sdata.get_x2();
+    int y2 = this->sdata.get_y2();
+    graphics.SetSmoothingMode(SmoothingModeAntiAlias);
+
+    // Transform
+
+    // Draw
+    if (this->sdata.get_stroke_width() != 0)
+        graphics.DrawLine(&pen, x1, y1, x2, y2);
+}
 // - - - - - - -
 // MyRectangle define
 MyRectangle:: MyRectangle () {
@@ -489,6 +514,36 @@ void MyRectangle:: what_is_this() {
     std::cout << "This is a MyRectangle " << '\n';
     Shape::what_is_this();
 }
+
+void MyRectangle:: draw(HDC hdc) {
+    Graphics graphics(hdc);
+
+    // Create a Pen object
+    int re = this->sdata.get_stroke().red();
+    int gr = this->sdata.get_stroke().green();
+    int bl = this->sdata.get_stroke().blue();
+    Color col = Color(this->sdata.get_stroke_opacity() * 255, re, gr, bl);
+    Pen pen(col, 1.0*this->sdata.get_stroke_width());
+
+    // Define
+    int x = this->sdata.get_x();
+    int y = this->sdata.get_y();
+    int width = this->sdata.get_width();
+    int height = this->sdata.get_height();
+    graphics.SetSmoothingMode(SmoothingModeAntiAlias);
+
+    // Transform
+
+    // Fill
+    re = this->sdata.get_fill().red();
+    gr = this->sdata.get_fill().green();
+    bl = this->sdata.get_fill().blue();
+    SolidBrush brush(Color(this->sdata.get_fill_opacity() * 255, re, gr, bl));
+    graphics.FillRectangle(&brush, x, y, width, height);
+    // Draw
+    if (this->sdata.get_stroke_width() != 0)
+        graphics.DrawRectangle(&pen, x, y, width, height);
+}
 // - - - - - - -
 // MyCircle define
 MyCircle:: MyCircle () {
@@ -517,6 +572,37 @@ MyCircle& MyCircle:: operator= (const MyCircle& c) {
 void MyCircle:: what_is_this() {
     std::cout << "This is a MyCircle " << '\n';
     Shape::what_is_this();
+}
+
+void MyCircle:: draw(HDC hdc) {
+    Graphics graphics(hdc);
+
+    // Create a Pen object
+    int re = this->sdata.get_stroke().red();
+    int gr = this->sdata.get_stroke().green();
+    int bl = this->sdata.get_stroke().blue();
+    Color col = Color(this->sdata.get_stroke_opacity() * 255, re, gr, bl);
+    Pen pen(col, 1.0*this->sdata.get_stroke_width());
+
+    // Define
+    int x = this->sdata.get_cx() - this->sdata.get_r();
+    int y = this->sdata.get_cy() - this->sdata.get_r();
+    int width = this->sdata.get_r() * 2;
+    int height = this->sdata.get_r() * 2;
+    graphics.SetSmoothingMode(SmoothingModeAntiAlias);
+
+    // Transform
+
+    // Fill
+    re = this->sdata.get_fill().red();
+    gr = this->sdata.get_fill().green();
+    bl = this->sdata.get_fill().blue();
+    SolidBrush brush(Color(this->sdata.get_fill_opacity() * 255, re, gr, bl));
+    std::cout << re << ' ' << gr << ' ' << bl << '\n';
+    graphics.FillEllipse(&brush, x, y, width, height);
+    // Draw
+    if (this->sdata.get_stroke_width() != 0)
+        graphics.DrawEllipse(&pen, x, y, width, height);
 }
 // - - - - - - -
 // MyEllipse define
@@ -548,6 +634,36 @@ void MyEllipse:: what_is_this() {
     std::cout << "This is a MyEllipse " << '\n';
     Shape::what_is_this();
 }
+
+void MyEllipse:: draw(HDC hdc) {
+    Graphics graphics(hdc);
+
+    // Create a Pen object
+    int re = this->sdata.get_stroke().red();
+    int gr = this->sdata.get_stroke().green();
+    int bl = this->sdata.get_stroke().blue();
+    Color col = Color(this->sdata.get_stroke_opacity() * 255, re, gr, bl);
+    Pen pen(col, 1.0*this->sdata.get_stroke_width());
+
+    // Define
+    int x = this->sdata.get_cx() - this->sdata.get_rx();
+    int y = this->sdata.get_cy() - this->sdata.get_ry();
+    int width = this->sdata.get_rx() * 2;
+    int height = this->sdata.get_ry() * 2;
+    graphics.SetSmoothingMode(SmoothingModeAntiAlias);
+
+    // Transform
+
+    // Fill
+    re = this->sdata.get_fill().red();
+    gr = this->sdata.get_fill().green();
+    bl = this->sdata.get_fill().blue();
+    SolidBrush brush(Color(this->sdata.get_fill_opacity() * 255, re, gr, bl));
+    graphics.FillEllipse(&brush, x, y, width, height);
+    // Draw
+    if (this->sdata.get_stroke_width() != 0)
+        graphics.DrawEllipse(&pen, x, y, width, height);
+}
 // - - - - - - -
 // MyPolyline define
 MyPolyline:: MyPolyline () {
@@ -574,6 +690,39 @@ MyPolyline& MyPolyline:: operator= (const MyPolyline& p) {
 void MyPolyline:: what_is_this() {
     std::cout << "This is a MyPolyline " << '\n';
     Shape::what_is_this();
+}
+
+void MyPolyline:: draw(HDC hdc) {
+    Graphics graphics(hdc);
+    GraphicsPath gpath;
+
+    // Create a Pen object
+    int re = this->sdata.get_stroke().red();
+    int gr = this->sdata.get_stroke().green();
+    int bl = this->sdata.get_stroke().blue();
+    Color col = Color(this->sdata.get_stroke_opacity() * 255, re, gr, bl);
+    Pen pen(col, 1.0*this->sdata.get_stroke_width());
+
+    // Define
+    int ssize = this->sdata.get_points().size();
+    Point* tmp = new Point [this->sdata.get_points().size()];
+    for (int i=0; i < ssize; i++)
+        tmp[i] = Point(this->sdata.get_points()[i].get_x(), this->sdata.get_points()[i].get_y());
+    gpath.AddLines(tmp, ssize);
+    graphics.SetSmoothingMode(SmoothingModeAntiAlias);
+
+    // Transform
+
+    // Fill
+    re = this->sdata.get_fill().red();
+    gr = this->sdata.get_fill().green();
+    bl = this->sdata.get_fill().blue();
+    SolidBrush brush(Color(this->sdata.get_fill_opacity() * 255, re, gr, bl));
+    graphics.FillPath(&brush, &gpath);
+    // Draw
+    if (this->sdata.get_stroke_width() != 0)
+        graphics.DrawPath(&pen, &gpath);
+    delete [] tmp;
 }
 // - - - - - - -
 // MyPolygon define
@@ -602,6 +751,37 @@ void MyPolygon:: what_is_this() {
     std::cout << "This is a MyPolygon " << '\n';
     Shape::what_is_this();
 }
+
+void MyPolygon:: draw(HDC hdc) {
+    Graphics graphics(hdc);
+
+    // Create a Pen object
+    int re = this->sdata.get_stroke().red();
+    int gr = this->sdata.get_stroke().green();
+    int bl = this->sdata.get_stroke().blue();
+    Color col = Color(this->sdata.get_stroke_opacity() * 255, re, gr, bl);
+    Pen pen(col, 1.0*this->sdata.get_stroke_width());
+
+    // Define
+    int ssize = this->sdata.get_points().size();
+    Point* tmp = new Point [this->sdata.get_points().size()];
+    for (int i=0; i < ssize; i++)
+        tmp[i] = Point(this->sdata.get_points()[i].get_x(), this->sdata.get_points()[i].get_y());
+    graphics.SetSmoothingMode(SmoothingModeAntiAlias);
+
+    // Transform
+
+    // Fill
+    re = this->sdata.get_fill().red();
+    gr = this->sdata.get_fill().green();
+    bl = this->sdata.get_fill().blue();
+    SolidBrush brush(Color(this->sdata.get_fill_opacity() * 255, re, gr, bl));
+    graphics.FillPolygon(&brush, tmp, ssize);
+    // Draw
+    if (this->sdata.get_stroke_width() != 0)
+        graphics.DrawPolygon(&pen, tmp, this->sdata.get_points().size());
+    delete [] tmp;
+}
 // - - - - - - -
 // MyText define
 MyText:: MyText() {
@@ -628,19 +808,30 @@ void MyText:: what_is_this() {
     std::cout << "This is a MyText " << '\n';
     Shape::what_is_this();
 }
-// - - - - - - 
-// Path
 
-void Path:: what_is_this() {
-    std::cout << "This is a Path " << '\n';
-    Shape::what_is_this();
-}
-// - - - - - - 
-// Group
+void MyText:: draw(HDC hdc) {
+    Graphics graphics(hdc);
 
-void Group:: what_is_this() {
-    std::cout << "This is a Group " << '\n';
-    Shape::what_is_this();
+    int re = this->sdata.get_fill().red();
+    int gr = this->sdata.get_fill().green();
+    int bl = this->sdata.get_fill().blue();
+
+    // Define
+    int x = this->sdata.get_x();
+    int y = this->sdata.get_y();
+    FontFamily  fontFamily(L"Times New Roman");
+
+    int fontsize = this->sdata.get_font_size();  
+    Font        font(&fontFamily, fontsize, FontStyleRegular, UnitPixel);
+    PointF      point(x*1.0, y*1.0 - fontsize);
+
+    SolidBrush  brush(Color(this->sdata.get_fill_opacity() * 255, re, gr, bl));
+
+    std::string buf = std::string(this->sdata.get_content());
+    std::wstring wstr = std::wstring(buf.begin(),buf.end());
+    graphics.SetSmoothingMode(SmoothingModeAntiAlias);
+
+    graphics.DrawString(wstr.c_str(), -1, &font, point, &brush);
 }
 // - - - - - - 
 // project define
@@ -691,6 +882,7 @@ void project:: inputFromFile(std::vector<Shape*> &_shape, std::string filename, 
             /* nw = new Group; */
         /* else if (stmp == "path") */
             /* nw = new Path; */
+
         if (nw != NULL) 
         {
             Shapedata data_object;
