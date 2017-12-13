@@ -18,6 +18,8 @@ public:
     MyPoint (const MyPoint& p);
     MyPoint& operator= (const MyPoint& p);
     void set_point (int x, int y);
+    int get_x() { return x; }
+    int get_y() { return y; }
     friend std::ostream& operator<< (std::ostream& os, const MyPoint& p);
 };
 
@@ -30,6 +32,9 @@ public:
     MyColor ();
     MyColor (int r, int g, int b);
     MyColor (const MyColor &C);
+    int red() { return r; }
+    int green() { return g; }
+    int blue() { return b; }
     friend std::ostream& operator<< (std::ostream& os, const MyColor& c);
 };
 
@@ -37,10 +42,11 @@ std::ostream& operator<< (std::ostream& os, const MyColor& c);
 
 class Shapedata {
 private:
-    int _x, _y, _x1, _y1, _x2, _y2, _cx, _cy, _r, _rx, _ry, _height, _width, _stroke_width;
+    int _x, _y, _x1, _y1, _x2, _y2, _cx, _cy, _r, _rx, _ry, _height, _width, _stroke_width, _font_size;
     MyColor _stroke, _fill;
     double _stroke_opacity, _fill_opacity;
     std::vector<MyPoint> _points;
+    std::string _content;
 public: 
     Shapedata();
     int get_x() { return _x; }
@@ -62,6 +68,8 @@ public:
     double get_stroke_opacity () { return _stroke_opacity ; }
     double get_fill_opacity () { return _fill_opacity ; }
     std::vector<MyPoint> get_points() { return _points; }
+    int get_font_size(int t) { return _font_size; }
+    std::string get_content(int t) { return _content; }
 
     void set_x(int t) { _x = t; }
     void set_y(int t) { _y = t; }
@@ -82,6 +90,9 @@ public:
     void set_stroke_opacity (double t) { _stroke_opacity  = t; }
     void set_fill_opacity (double t) { _fill_opacity  = t; }
     void set_points(std::vector<MyPoint> t) { _points = t; } 
+    void set_font_size(int t) { _font_size = t; }
+    void set_content(std::string t) { _content = t; }
+
     void show_shapedata();
 };
 
@@ -229,7 +240,7 @@ class Fill : public Attribute {
 private:
     MyColor value;
 public:
-    Fill() : value(MyColor(255, 255, 255)) {}
+    Fill() : value(MyColor(0, 0, 0)) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
     MyColor getValue();
@@ -251,7 +262,7 @@ class Stroke : public Attribute {
 private: 
     MyColor value;
 public:
-    Stroke() : value(MyColor(0, 0, 0)) {}
+    Stroke() : value(MyColor(255, 255, 255)) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
     MyColor getValue();
@@ -280,16 +291,35 @@ public:
     void what_is_this();
 };
 
+class Font_size : public Attribute {
+private:
+    int value;
+public:
+    std::string getName();
+    void setValue(char* attr_value, Shapedata &data);
+    int getValue();
+    void what_is_this();
+};
+
+class Content : public Attribute {
+private:
+    std::string value;
+public:
+    std::string getName();
+    void setValue(char* attr_value, Shapedata &data);
+    int getValue();
+    void what_is_this();
+};
+
 class Points : public Attribute {
 private:
     std::vector<MyPoint> value; 
 public:
     std::string getName();
-    void setValue(char * attr_value, Shapedata &data);
+    void setValue(char* attr_value, Shapedata &data);
     std::vector<MyPoint> getValue();
     void what_is_this();
 };
-
 
 class Shape{
 protected:
@@ -308,7 +338,7 @@ public:
     virtual void what_is_this() = 0;
 };
 
-class Line : public Shape{
+class MyLine : public Shape{
 private:
     // p1, p2
     // stroke
@@ -316,9 +346,9 @@ private:
     MyPoint p1, p2; 
     // transform
 public:
-    Line ();
-    Line (const Line& l);
-    Line& operator= (const Line& l);
+    MyLine ();
+    MyLine (const MyLine& l);
+    MyLine& operator= (const MyLine& l);
     void what_is_this();
 };
 
@@ -401,9 +431,11 @@ public:
 };
 
 class MyText : public Shape {
-
+private: 
 public:
-
+    MyText();
+    MyText(const MyText& t);
+    MyText& operator= (const MyText& t);
     void what_is_this();
 };
 

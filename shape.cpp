@@ -47,10 +47,11 @@ std::ostream& operator<< (std::ostream& os, const MyColor& c) {
 // Shapedata define
 Shapedata:: Shapedata() {
     _x = _y = _x1 = _x2 = _y1 = _y2 = _cx = _cy = _r = _rx = _ry = _height = _width = _stroke_width = 0;
-    _stroke = MyColor(0, 0, 0); 
-    _fill = MyColor(255, 255, 255);
+    _stroke = MyColor(255, 255, 255); 
+    _fill = MyColor(0, 0, 0);
     _stroke_opacity = 1; 
     _fill_opacity = 1;
+    _content = "";
 }
 /* void Shapedata:: show_shapedata() { */
 /*     std::cout << "x=" << _x << " y=" << _y << " x1=" << _x1 << " y1=" << _y1 << " x2=" << _x2 << " y2=" << _y2 << '\n'; */
@@ -321,6 +322,34 @@ void Stroke_opacity:: what_is_this() {
     std::cout << "stroke-opacity=" << value << ' ';
 }
 // - - - - - - 
+// Font_size define
+std::string Font_size:: getName() {
+    return "font-size";
+}
+
+void Font_size:: setValue(char* attr_value, Shapedata &data) {
+    this->value = atoi(attr_value);
+    data.set_font_size(this->value);
+}
+
+void Font_size:: what_is_this() {
+    std::cout << "font-size=" << value << ' ';
+}
+// - - - - - - 
+// Content define
+std::string Content:: getName() {
+    return "content";
+}
+
+void Content:: setValue(char* attr_value, Shapedata &data) {
+    this->value = std::string(attr_value);
+    data.set_content(this->value);
+}
+
+void Content:: what_is_this() {
+    std::cout << "content=" << value << ' ';
+}
+// - - - - - - 
 // Points define
 std::string Points:: getName() {
     return "points";
@@ -374,6 +403,15 @@ void Shape:: setAttribute(char* attr_name, char* attr_value, Shapedata &data) {
 }
 
 void Shape:: input(rapidxml::xml_node<>* node, Shapedata &data) {
+    if (node->name() == std::string("text")) {
+        std::string s = "content";
+        char *c = new char[s.size()+1];
+        for (int i=0; i < s.size(); i++)
+            c[i] = s[i];
+        c[s.size()] = '\0';
+        this->setAttribute(c, node->value(), data);
+        delete []c;
+    }
     for (rapidxml::xml_attribute<> *attr = node->first_attribute(); attr; attr = attr->next_attribute())
         this->setAttribute(attr->name(), attr->value(), data);
 }
@@ -394,8 +432,8 @@ void Shape:: what_is_this() {
     std::cout << '\n';
 }
 // - - - - - - - 
-// Line define
-Line:: Line () {
+// MyLine define
+MyLine:: MyLine () {
     attributes.push_back(new X1);
     attributes.push_back(new Y1);
     attributes.push_back(new X2);
@@ -405,20 +443,20 @@ Line:: Line () {
     attributes.push_back(new Stroke_opacity);
 }
 
-Line:: Line (const Line& l) {
-    Line();
+MyLine:: MyLine (const MyLine& l) {
+    MyLine();
     this->attributes = l.attributes;
 }
 
-Line& Line:: operator= (const Line& l) {
+MyLine& MyLine:: operator= (const MyLine& l) {
     if (this == &l) 
         return *this;
     this->attributes = l.attributes;
     return *this;
 }
 
-void Line:: what_is_this() {
-    std::cout << "This is a Line " << '\n';
+void MyLine:: what_is_this() {
+    std::cout << "This is a MyLine " << '\n';
     Shape::what_is_this();
 }
 // - - - - - - -
@@ -566,6 +604,25 @@ void MyPolygon:: what_is_this() {
 }
 // - - - - - - -
 // MyText define
+MyText:: MyText() {
+    attributes.push_back(new X);
+    attributes.push_back(new Y);
+    attributes.push_back(new Fill);
+    attributes.push_back(new Font_size);
+    attributes.push_back(new Content);
+}
+
+MyText:: MyText(const MyText& t) {
+    MyText();
+    this->attributes = t.attributes;
+}
+
+MyText& MyText:: operator= (const MyText& t) {
+    if (this == &t)
+        return *this;
+    this->attributes = t.attributes;
+    return *this;
+}
 
 void MyText:: what_is_this() {
     std::cout << "This is a MyText " << '\n';
@@ -617,7 +674,7 @@ void project:: inputFromFile(std::vector<Shape*> &_shape, std::string filename, 
         nw = NULL;
         std::string stmp = object_node->name();
         if (stmp == "line")
-            nw = new Line;
+            nw = new MyLine;
         else if (stmp == "polyline")
             nw = new MyPolyline;
         else if (stmp == "polygon")
@@ -634,7 +691,6 @@ void project:: inputFromFile(std::vector<Shape*> &_shape, std::string filename, 
             /* nw = new Group; */
         /* else if (stmp == "path") */
             /* nw = new Path; */
-
         if (nw != NULL) 
         {
             Shapedata data_object;
