@@ -12,6 +12,28 @@ std::ostream& operator<< (std::ostream& os, const Color& c) {
     return os;
 }
 // - - - - - - 
+// Shapedata define
+Shapedata:: Shapedata() {
+    _x = _y = _x1 = _x2 = _y1 = _y2 = _cx = _cy = _r = _rx = _ry = _height = _width = _stroke_width = 0;
+    _stroke = Color(0, 0, 0); 
+    _fill = Color(255, 255, 255);
+    _stroke_opacity = 1; 
+    _fill_opacity = 1;
+}
+/* void Shapedata:: show_shapedata() { */
+/*     std::cout << "x=" << _x << " y=" << _y << " x1=" << _x1 << " y1=" << _y1 << " x2=" << _x2 << " y2=" << _y2 << '\n'; */
+/*     std::cout << "cx=" << _cx << " cy=" << _cy << " r=" << _r << " rx=" << _rx << " ry=" << _ry << '\n'; */
+/*     std::cout << "height=" << _height << " width=" << _width << " stroke_width=" << _stroke_width << " stroke=" << _stroke << " stroke_opacity=" << _stroke_opacity << '\n'; */
+/*     std::cout << "fill=" << _fill << " fill_opacity=" << _fill_opacity << '\n'; */
+/* } */
+
+void Shapedata:: show_shapedata() {
+    std::cout << "x=" << get_x() << " y=" << get_y() << " x1=" << get_x1() << " y1=" << get_y1() << " x2=" << get_x2() << " y2=" << get_y2() << '\n';
+    std::cout << "cx=" << get_cx() << " cy=" << get_cy() << " r=" << get_r() << " rx=" << get_rx() << " ry=" << get_ry() << '\n';
+    std::cout << "height=" << get_height() << " width=" << get_width() << " strokeget_width()=" << get_stroke_width() << " stroke=" << get_stroke() << " strokeget_opacity()=" << get_stroke_opacity() << '\n';
+    std::cout << "fill=" << get_fill() << " fillget_opacity()=" << get_fill_opacity() << '\n';
+}
+// - - - - - - 
 // Attribute define
 
 // - - - - - - 
@@ -20,8 +42,9 @@ std::string X:: getName() {
     return "x";
 }
 
-void X:: setValue(char* attr_value) {
+void X:: setValue(char* attr_value, Shapedata &data) {
     this->value = atoi(attr_value);
+    data.set_x(this->value);
 }
 
 void X:: what_is_this() {
@@ -33,8 +56,9 @@ std::string Y:: getName() {
     return "y";
 }
 
-void Y:: setValue(char* attr_value) {
+void Y:: setValue(char* attr_value, Shapedata &data) {
     this->value = atoi(attr_value);
+    data.set_y(this->value);
 }
 
 void Y:: what_is_this() {
@@ -46,8 +70,9 @@ std::string X1:: getName() {
     return "x1";
 }
 
-void X1:: setValue(char* attr_value) {
+void X1:: setValue(char* attr_value, Shapedata &data) {
     this->value = atoi(attr_value);
+    data.set_x1(this->value);
 }
 
 void X1:: what_is_this() {
@@ -59,8 +84,9 @@ std::string Y1:: getName() {
     return "y1";
 }
 
-void Y1:: setValue(char* attr_value) {
+void Y1:: setValue(char* attr_value, Shapedata &data) {
     this->value = atoi(attr_value);
+    data.set_y1(this->value);
 }
 
 void Y1:: what_is_this() {
@@ -72,8 +98,9 @@ std::string X2:: getName() {
     return "x2";
 }
 
-void X2:: setValue(char* attr_value) {
+void X2:: setValue(char* attr_value, Shapedata &data) {
     this->value = atoi(attr_value);
+    data.set_x2(this->value);
 }
 
 void X2:: what_is_this() {
@@ -85,8 +112,9 @@ std::string Y2:: getName() {
     return "y2";
 }
 
-void Y2:: setValue(char* attr_value) {
+void Y2:: setValue(char* attr_value, Shapedata &data) {
     this->value = atoi(attr_value);
+    data.set_y2(this->value);
 }
 
 void Y2:: what_is_this() {
@@ -98,8 +126,9 @@ std::string Cx:: getName() {
     return "cx";
 }
 
-void Cx:: setValue(char* attr_value) {
+void Cx:: setValue(char* attr_value, Shapedata &data) {
     this->value = atoi(attr_value);
+    data.set_cx(this->value);
 }
 
 void Cx:: what_is_this() {
@@ -111,8 +140,9 @@ std::string Cy:: getName() {
     return "cy";
 }
 
-void Cy:: setValue(char* attr_value) {
+void Cy:: setValue(char* attr_value, Shapedata &data) {
     this->value = atoi(attr_value);
+    data.set_cy(this->value);
 }
 
 void Cy:: what_is_this() {
@@ -124,8 +154,9 @@ std::string R:: getName() {
     return "r";
 }
 
-void R:: setValue(char* attr_value) {
+void R:: setValue(char* attr_value, Shapedata &data) {
     this->value = atoi(attr_value);
+    data.set_r(this->value);
 }
 
 void R:: what_is_this() {
@@ -137,8 +168,9 @@ std::string Rx:: getName() {
     return "rx";
 }
 
-void Rx:: setValue(char* attr_value) {
+void Rx:: setValue(char* attr_value, Shapedata &data) {
     this->value = atoi(attr_value);
+    data.set_rx(this->value);
 }
 
 void Rx:: what_is_this() {
@@ -150,8 +182,9 @@ std::string Ry:: getName() {
     return "ry";
 }
 
-void Ry:: setValue(char* attr_value) {
+void Ry:: setValue(char* attr_value, Shapedata &data) {
     this->value = atoi(attr_value);
+    data.set_ry(this->value);
 }
 
 void Ry:: what_is_this() {
@@ -163,8 +196,9 @@ std::string Height:: getName() {
     return "height";
 }
 
-void Height:: setValue(char* attr_value) {
+void Height:: setValue(char* attr_value, Shapedata &data) {
     this->value = atoi(attr_value);
+    data.set_height(this->value);
 }
 
 void Height:: what_is_this() {
@@ -176,8 +210,9 @@ std::string Width:: getName() {
     return "width";
 }
 
-void Width:: setValue(char* attr_value) {
+void Width:: setValue(char* attr_value, Shapedata &data) {
     this->value = atoi(attr_value);
+    data.set_width(this->value);
 }
 
 void Width:: what_is_this() {
@@ -189,8 +224,9 @@ std::string Fill:: getName() {
     return "fill";
 }
 
-void Fill:: setValue(char* attr_value) {
+void Fill:: setValue(char* attr_value, Shapedata &data) {
     this->value = project::atoc(attr_value);
+    data.set_fill(this->value);
 }
 
 void Fill:: what_is_this() {
@@ -202,8 +238,9 @@ std::string Fill_opacity:: getName() {
     return "fill-opacity";
 }
 
-void Fill_opacity:: setValue(char* attr_value) {
+void Fill_opacity:: setValue(char* attr_value, Shapedata &data) {
     this->value = atof(attr_value);
+    data.set_fill_opacity(this->value);
 }
 
 void Fill_opacity:: what_is_this() {
@@ -215,8 +252,9 @@ std::string Stroke:: getName() {
     return "stroke";
 }
 
-void Stroke:: setValue(char* attr_value) {
+void Stroke:: setValue(char* attr_value, Shapedata &data) {
     this->value = project::atoc(attr_value);
+    data.set_stroke(this->value);
 }
 
 void Stroke:: what_is_this() {
@@ -228,8 +266,9 @@ std::string Stroke_width:: getName() {
     return "stroke-width";
 }
 
-void Stroke_width:: setValue(char* attr_value) {
+void Stroke_width:: setValue(char* attr_value, Shapedata &data) {
     this->value = atoi(attr_value);
+    data.set_stroke_width(this->value);
 }
 
 void Stroke_width:: what_is_this() {
@@ -241,8 +280,9 @@ std::string Stroke_opacity:: getName() {
     return "stroke-opacity";
 }
 
-void Stroke_opacity:: setValue(char* attr_value) {
+void Stroke_opacity:: setValue(char* attr_value, Shapedata &data) {
     this->value = atof(attr_value);
+    data.set_stroke_opacity(this->value);
 }
 
 void Stroke_opacity:: what_is_this() {
@@ -277,52 +317,38 @@ void Point:: set_point (int x, int y) {
 }
 // - - - - - - -
 // Shape define
-Shape& Shape:: operator= (const Shape& s) {
+Shape:: Shape(const Shape& s) {
+    this->attributes = s.attributes;
+    this->sdata = s.sdata;
+}
+
+Shape& Shape:: operator=(const Shape& s) {
+    this->attributes = s.attributes;
+    this->sdata = s.sdata;
     return *this;
 }
 
-/* Color Shape:: get_stroke () { */
-/*     for (int i=0, size=attributes.size(); i < size; i++) */
-/*         if (attributes[i]->getName() == "stroke") */
-/*             return attributes[i]->getValue(); */
-/* } */
-
-/* Color Shape:: get_fill () { */
-/*     for (int i=0, size=attributes.size(); i < size; i++) */
-/*         if (attributes[i]->getName() == "fill") */
-/*             return attributes[i]->getValue(); */
-/* } */
-
-/* int Shape:: get_stroke_width () { */
-/*     for (int i=0, size=attributes.size(); i < size; i++) */
-/*         if (attributes[i]->getName() == "stroke-width") */
-/*             return attributes[i]->getValue(); */
-/* } */
-
-/* double Shape:: get_stroke_opacity () { */
-/*     for (int i=0, size=attributes.size(); i < size; i++) */
-/*         if (attributes[i]->getName() == "stroke-opacity") */
-/*             return attributes[i]->getValue(); */
-/* } */
-
-/* double Shape:: get_fill_opacity () { */
-/*     for (int i=0, size=attributes.size(); i < size; i++) */
-/*         if (attributes[i]->getName() == "fill-opacity") */
-/*             return attributes[i]->getValue(); */
-/* } */
-
-void Shape:: setAttribute(char* attr_name, char* attr_value) {
+void Shape:: setAttribute(char* attr_name, char* attr_value, Shapedata &data) {
     int size = this->attributes.size();
     for (int i=0; i < size; i++) {
         if (std::string(attr_name) == this->attributes[i]->getName()) {
-            this->attributes[i]->setValue(attr_value);
+            this->attributes[i]->setValue(attr_value, data);
         }
     }
 }
 
-void Shape:: input(rapidxml::xml_node<>* node) {
+void Shape:: input(rapidxml::xml_node<>* node, Shapedata &data) {
     for (rapidxml::xml_attribute<> *attr = node->first_attribute(); attr; attr = attr->next_attribute())
-        this->setAttribute(attr->name(), attr->value());
+        this->setAttribute(attr->name(), attr->value(), data);
+}
+
+void Shape:: setlink(Shapedata link) {
+    sdata = link;
+}
+
+void Shape:: show_linker_data() {
+    sdata.show_shapedata(); 
+    /* std::cout << "This link is " << sdata << '\n'; */
 }
 
 void Shape:: what_is_this() {
@@ -535,7 +561,7 @@ Color project::atoc(char* c) {
     }
     return Color(t[0], t[1], t[2]);
 }
-void project:: inputFromFile(std::vector<Shape*> &_shape, std::string filename)
+void project:: inputFromFile(std::vector<Shape*> &_shape, std::string filename, Database &data_system)
 {
     //cout << "Parsing the file ......." << endl;
     rapidxml::xml_document<> doc;
@@ -545,10 +571,11 @@ void project:: inputFromFile(std::vector<Shape*> &_shape, std::string filename)
     buffer.push_back('\0');
     doc.parse<0>(&buffer[0]);
     root_node = doc.first_node("svg");
+    Shape* nw;
     for (rapidxml::xml_node<> * object_node = root_node->first_node(); object_node; object_node = object_node->next_sibling())
     {
         //cout << "This is object: " << object_node->name() << endl;
-        Shape* nw = NULL;
+        nw = NULL;
         std::string stmp = object_node->name();
         if (stmp == "line")
             nw = new Line;
@@ -571,9 +598,14 @@ void project:: inputFromFile(std::vector<Shape*> &_shape, std::string filename)
 
         if (nw != NULL) 
         {
-            nw->input(object_node);
+            Shapedata data_object;
+            nw->input(object_node, data_object);
+            data_system.add(data_object);
+
+            nw->setlink( data_object);
             _shape.push_back(nw);
         }
+        nw = NULL;
     }
     return;
 }

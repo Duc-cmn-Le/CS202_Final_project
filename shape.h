@@ -27,6 +27,7 @@ private:
     Color _stroke, _fill;
     double _stroke_opacity, _fill_opacity;
 public: 
+    Shapedata();
     int get_x() { return _x; }
     int get_y() { return _y; }
     int get_x1() { return _x1; }
@@ -64,13 +65,14 @@ public:
     void set_stroke_width (int t) { _stroke_width  = t; }
     void set_stroke_opacity (double t) { _stroke_opacity  = t; }
     void set_fill_opacity (double t) { _fill_opacity  = t; }
+    void show_shapedata();
 };
 
 class Attribute {
 
 public:
     virtual std::string getName() = 0;
-    virtual void setValue(char* attr_value) = 0;
+    virtual void setValue(char* attr_value, Shapedata &data) = 0;
     virtual void what_is_this() = 0;
 };
 
@@ -79,7 +81,7 @@ private:
 public:
     int value;
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     int getValue();
     void what_is_this();
 };
@@ -89,7 +91,7 @@ private:
 public:
     int value;
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     int getValue();
     void what_is_this();
 };
@@ -99,7 +101,7 @@ private:
 public:
     int value;
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     int getValue();
     void what_is_this();
 };
@@ -109,7 +111,7 @@ private:
 public:
     int value;
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     int getValue();
     void what_is_this();
 };
@@ -119,7 +121,7 @@ private:
 public:
     int value;
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     int getValue();
     void what_is_this();
 };
@@ -129,7 +131,7 @@ private:
 public:
     int value;
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     int getValue();
     void what_is_this();
 };
@@ -139,7 +141,7 @@ private:
 public:
     int value;
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     int getValue();
     void what_is_this();
 };
@@ -149,7 +151,7 @@ private:
 public:
     int value;
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     int getValue();
     void what_is_this();
 };
@@ -159,7 +161,7 @@ private:
 public:
     int value;
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     int getValue();
     void what_is_this();
 };
@@ -169,7 +171,7 @@ private:
 public:
     int value;
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     int getValue();
     void what_is_this();
 };
@@ -179,7 +181,7 @@ private:
 public:
     int value;
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     int getValue();
     void what_is_this();
 };
@@ -190,7 +192,7 @@ public:
     int value;
     Height() : value(0) {}
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     int getValue();
     void what_is_this();
 };
@@ -201,7 +203,7 @@ public:
     int value;
     Width() : value(0) {}
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     int getValue();
     void what_is_this();
 };
@@ -212,7 +214,7 @@ public:
     Color value;
     Fill() : value(Color(255, 255, 255)) {}
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     Color getValue();
     void what_is_this();
 };
@@ -223,7 +225,7 @@ public:
     double value;
     Fill_opacity() : value(1) {}
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     double getValue();
     void what_is_this();
 };
@@ -234,7 +236,7 @@ public:
     Color value;
     Stroke() : value(Color(0, 0, 0)) {}
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     Color getValue();
     void what_is_this();
 };
@@ -245,7 +247,7 @@ public:
     int value;
     Stroke_width() : value(0) {}
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     int getValue();
     void what_is_this();
 };
@@ -256,7 +258,7 @@ public:
     double value;
     Stroke_opacity() : value(1) {}
     std::string getName();
-    void setValue(char* attr_value);
+    void setValue(char* attr_value, Shapedata &data);
     double getValue();
     void what_is_this();
 };
@@ -276,13 +278,16 @@ public:
 class Shape{
 protected:
     std::vector< Attribute*> attributes;
-    Shapedata* snode;
+    Shapedata sdata;
 public:
+    Shape() = default;
+    Shape(const Shape& s);
+    Shape& operator=(const Shape& s);
 
-    Shape& operator= (const Shape& s);
-
-    void setAttribute(char* attr_name, char* attr_value);
-    void input(rapidxml::xml_node<>* object_node);
+    void setAttribute(char* attr_name, char* attr_value, Shapedata &data);
+    void input(rapidxml::xml_node<>* object_node, Shapedata &data);
+    void setlink(Shapedata link);
+    void show_linker_data();
 
     virtual void what_is_this() = 0;
 };
@@ -402,11 +407,18 @@ public:
 
 class Database{
 private:
-    static std::vector<Shapedata> data_shape; 
+    std::vector<Shapedata> data_shape; 
+public:
+    void add(Shapedata object) {
+        data_shape.push_back(object);
+    }
+    Shapedata& last() {
+        return data_shape.back();
+    }
 };
 
 namespace project{
     Color atoc(char* c);
-    void inputFromFile(std::vector<Shape*> &_shape, std::string filename);
+    void inputFromFile(std::vector<Shape*> &_shape, std::string filename, Database &data_system);
 }
 
