@@ -9,6 +9,20 @@
 
 typedef float Type;
 
+class MyPoint {
+private:
+    int x, y;
+public:
+    MyPoint ();
+    MyPoint (int x, int y);
+    MyPoint (const MyPoint& p);
+    MyPoint& operator= (const MyPoint& p);
+    void set_point (int x, int y);
+    friend std::ostream& operator<< (std::ostream& os, const MyPoint& p);
+};
+
+std::ostream& operator<< (std::ostream& os, const MyPoint& p);
+
 class MyColor{
 private:
     int r, g, b;
@@ -26,6 +40,7 @@ private:
     int _x, _y, _x1, _y1, _x2, _y2, _cx, _cy, _r, _rx, _ry, _height, _width, _stroke_width;
     MyColor _stroke, _fill;
     double _stroke_opacity, _fill_opacity;
+    std::vector<MyPoint> _points;
 public: 
     Shapedata();
     int get_x() { return _x; }
@@ -46,6 +61,7 @@ public:
     int get_stroke_width () { return _stroke_width ; }
     double get_stroke_opacity () { return _stroke_opacity ; }
     double get_fill_opacity () { return _fill_opacity ; }
+    std::vector<MyPoint> get_points() { return _points; }
 
     void set_x(int t) { _x = t; }
     void set_y(int t) { _y = t; }
@@ -65,6 +81,7 @@ public:
     void set_stroke_width (int t) { _stroke_width  = t; }
     void set_stroke_opacity (double t) { _stroke_opacity  = t; }
     void set_fill_opacity (double t) { _fill_opacity  = t; }
+    void set_points(std::vector<MyPoint> t) { _points = t; } 
     void show_shapedata();
 };
 
@@ -78,8 +95,8 @@ public:
 
 class X : public Attribute {
 private:
-public:
     int value;
+public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
     int getValue();
@@ -88,8 +105,8 @@ public:
 
 class Y : public Attribute {
 private:
-public:
     int value;
+public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
     int getValue();
@@ -98,8 +115,8 @@ public:
 
 class X1 : public Attribute {
 private:
-public:
     int value;
+public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
     int getValue();
@@ -108,8 +125,8 @@ public:
 
 class Y1 : public Attribute {
 private:
-public:
     int value;
+public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
     int getValue();
@@ -118,8 +135,8 @@ public:
 
 class X2 : public Attribute {
 private:
-public:
     int value;
+public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
     int getValue();
@@ -128,8 +145,8 @@ public:
 
 class Y2 : public Attribute {
 private:
-public:
     int value;
+public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
     int getValue();
@@ -138,8 +155,8 @@ public:
 
 class Cx : public Attribute {
 private:
-public:
     int value;
+public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
     int getValue();
@@ -148,8 +165,8 @@ public:
 
 class Cy : public Attribute {
 private:
-public:
     int value;
+public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
     int getValue();
@@ -158,8 +175,8 @@ public:
 
 class R : public Attribute {
 private:
-public:
     int value;
+public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
     int getValue();
@@ -168,8 +185,8 @@ public:
 
 class Rx : public Attribute {
 private:
-public:
     int value;
+public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
     int getValue();
@@ -178,8 +195,8 @@ public:
 
 class Ry : public Attribute {
 private:
-public:
     int value;
+public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
     int getValue();
@@ -188,8 +205,8 @@ public:
 
 class Height : public Attribute {
 private:
-public:
     int value;
+public:
     Height() : value(0) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
@@ -199,8 +216,8 @@ public:
 
 class Width : public Attribute {
 private:
-public:
     int value;
+public:
     Width() : value(0) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
@@ -210,8 +227,8 @@ public:
 
 class Fill : public Attribute {
 private:
-public:
     MyColor value;
+public:
     Fill() : value(MyColor(255, 255, 255)) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
@@ -221,8 +238,8 @@ public:
 
 class Fill_opacity : public Attribute {
 private:
-public:
     double value;
+public:
     Fill_opacity() : value(1) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
@@ -232,8 +249,8 @@ public:
 
 class Stroke : public Attribute {
 private: 
-public:
     MyColor value;
+public:
     Stroke() : value(MyColor(0, 0, 0)) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
@@ -243,8 +260,8 @@ public:
 
 class Stroke_width : public Attribute {
 private:
-public:
     int value;
+public:
     Stroke_width() : value(0) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
@@ -254,8 +271,8 @@ public:
 
 class Stroke_opacity : public Attribute {
 private:
-public:
     double value;
+public:
     Stroke_opacity() : value(1) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
@@ -263,17 +280,16 @@ public:
     void what_is_this();
 };
 
-
-class MyPoint {
+class Points : public Attribute {
 private:
-    int x, y;
+    std::vector<MyPoint> value; 
 public:
-    MyPoint ();
-    MyPoint (int x, int y);
-    MyPoint (const MyPoint& p);
-    MyPoint& operator= (const MyPoint& p);
-    void set_point (int x, int y);
+    std::string getName();
+    void setValue(char * attr_value, Shapedata &data);
+    std::vector<MyPoint> getValue();
+    void what_is_this();
 };
+
 
 class Shape{
 protected:
@@ -361,7 +377,7 @@ private:
     // vector<MyPoint> points
     // stroke, fill
     // stroke_width, stroke_opacity, fill_opacity
-    std::vector<MyPoint> points;
+    /* std::vector<MyPoint> points; */
     // transform
 public:
     MyPolyline ();

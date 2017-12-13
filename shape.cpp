@@ -1,4 +1,36 @@
 #include "shape.h"
+// MyPoint define
+MyPoint:: MyPoint () {
+    x = 0; 
+    y = 0;
+}
+
+MyPoint:: MyPoint (int x, int y) {
+    this->x = x;
+    this->y = y;
+}
+
+MyPoint:: MyPoint (const MyPoint& p) {
+    this->x = p.x;
+    this->y = p.y;
+}
+
+MyPoint& MyPoint:: operator= (const MyPoint& p) {
+    this->x = p.x;
+    this->y = p.y;
+    return *this;
+}
+
+void MyPoint:: set_point (int x, int y) {
+    this->x = x;
+    this->y = y;
+}
+
+std::ostream& operator<< (std::ostream& os, const MyPoint& p) {
+    os << p.x << ',' << p.y;
+    return os;
+}
+// - - - - - - -
 // MyColor define 
 
 MyColor:: MyColor() : r(0), g(0), b(0) {}
@@ -289,33 +321,37 @@ void Stroke_opacity:: what_is_this() {
     std::cout << "stroke-opacity=" << value << ' ';
 }
 // - - - - - - 
-// MyPoint define
-MyPoint:: MyPoint () {
-    x = 0; 
-    y = 0;
+// Points define
+std::string Points:: getName() {
+    return "points";
 }
 
-MyPoint:: MyPoint (int x, int y) {
-    this->x = x;
-    this->y = y;
+void Points:: setValue(char* attr_value, Shapedata &data) {
+    this->value.clear();
+    int pos = 0, size = strlen(attr_value), x[2] = {0, 0};
+    for (int  i=0; i < size; i++) 
+        if (attr_value[i] == ',') {
+            pos = 1;
+            x[pos] = 0;
+        }
+        else if (attr_value[i] == ' ') {
+            this->value.push_back(MyPoint(x[0], x[1]));
+            pos = 0;
+            x[pos] = 0;
+        }
+        else {
+            x[pos] = x[pos] * 10 + attr_value[i] - '0';
+        }
+    this->value.push_back(MyPoint(x[0], x[1]));
+    data.set_points(this->value);
 }
 
-MyPoint:: MyPoint (const MyPoint& p) {
-    this->x = p.x;
-    this->y = p.y;
+void Points:: what_is_this() {
+    std::cout << "points=";
+    for (int i=0, size=value.size(); i < size; i++)
+        std::cout << value[i] << ' ';
 }
-
-MyPoint& MyPoint:: operator= (const MyPoint& p) {
-    this->x = p.x;
-    this->y = p.y;
-    return *this;
-}
-
-void MyPoint:: set_point (int x, int y) {
-    this->x = x;
-    this->y = y;
-}
-// - - - - - - -
+// - - - - - - 
 // Shape define
 Shape:: Shape(const Shape& s) {
     this->attributes = s.attributes;
@@ -482,6 +518,7 @@ MyPolyline:: MyPolyline () {
     attributes.push_back(new Stroke);
     attributes.push_back(new Stroke_width);
     attributes.push_back(new Stroke_opacity);
+    attributes.push_back(new Points);
 }
 
 MyPolyline:: MyPolyline (const MyPolyline& p) {
@@ -508,6 +545,7 @@ MyPolygon:: MyPolygon () {
     attributes.push_back(new Stroke);
     attributes.push_back(new Stroke_width);
     attributes.push_back(new Stroke_opacity);
+    attributes.push_back(new Points);
 }
 
 MyPolygon:: MyPolygon (const MyPolygon& p) {
@@ -561,6 +599,7 @@ MyColor project::atoc(char* c) {
     }
     return MyColor(t[0], t[1], t[2]);
 }
+
 void project:: inputFromFile(std::vector<Shape*> &_shape, std::string filename, Database &data_system)
 {
     //cout << "Parsing the file ......." << endl;
