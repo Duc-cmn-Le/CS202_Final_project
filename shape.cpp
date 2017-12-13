@@ -386,8 +386,8 @@ void Line:: what_is_this() {
     Shape::what_is_this();
 }
 // - - - - - - -
-// Rectangle define
-Rectangle:: Rectangle () {
+// MyRectangle define
+MyRectangle:: MyRectangle () {
     attributes.push_back(new X);
     attributes.push_back(new Y);
     attributes.push_back(new Width);
@@ -399,25 +399,25 @@ Rectangle:: Rectangle () {
     attributes.push_back(new Stroke_opacity);
 }
 
-Rectangle:: Rectangle (const Rectangle& r) {
-    Rectangle();
+MyRectangle:: MyRectangle (const MyRectangle& r) {
+    MyRectangle();
     this->attributes = r.attributes;
 }
 
-Rectangle& Rectangle:: operator= (const Rectangle& r) {
+MyRectangle& MyRectangle:: operator= (const MyRectangle& r) {
     if (this == &r) 
         return *this;
     this->attributes = r.attributes;
     return *this;
 }
 
-void Rectangle:: what_is_this() {
-    std::cout << "This is a Rectangle " << '\n';
+void MyRectangle:: what_is_this() {
+    std::cout << "This is a MyRectangle " << '\n';
     Shape::what_is_this();
 }
 // - - - - - - -
-// Circle define
-Circle:: Circle () {
+// MyCircle define
+MyCircle:: MyCircle () {
     attributes.push_back(new Cx);
     attributes.push_back(new Cy);
     attributes.push_back(new R);
@@ -428,25 +428,25 @@ Circle:: Circle () {
     attributes.push_back(new Stroke_opacity);
 }
 
-Circle:: Circle (const Circle& c) {
-    Circle();
+MyCircle:: MyCircle (const MyCircle& c) {
+    MyCircle();
     this->attributes = c.attributes;
 }
 
-Circle& Circle:: operator= (const Circle& c) {
+MyCircle& MyCircle:: operator= (const MyCircle& c) {
     if (this == &c) 
         return *this;
     this->attributes = c.attributes;
     return *this;
 }
 
-void Circle:: what_is_this() {
-    std::cout << "This is a Circle " << '\n';
+void MyCircle:: what_is_this() {
+    std::cout << "This is a MyCircle " << '\n';
     Shape::what_is_this();
 }
 // - - - - - - -
-// Ellipse define
-Ellipse:: Ellipse () {
+// MyEllipse define
+MyEllipse:: MyEllipse () {
     attributes.push_back(new Cx);
     attributes.push_back(new Cy);
     attributes.push_back(new Rx);
@@ -458,25 +458,25 @@ Ellipse:: Ellipse () {
     attributes.push_back(new Stroke_opacity);
 }
 
-Ellipse:: Ellipse (const Ellipse& e) {
-    Ellipse();
+MyEllipse:: MyEllipse (const MyEllipse& e) {
+    MyEllipse();
     this->attributes = e.attributes;
 }
 
-Ellipse& Ellipse:: operator= (const Ellipse& e) {
+MyEllipse& MyEllipse:: operator= (const MyEllipse& e) {
     if (this == &e)
         return *this;
     this->attributes = e.attributes;
     return *this;
 }
 
-void Ellipse:: what_is_this() {
-    std::cout << "This is a Ellipse " << '\n';
+void MyEllipse:: what_is_this() {
+    std::cout << "This is a MyEllipse " << '\n';
     Shape::what_is_this();
 }
 // - - - - - - -
-// Polyline define
-Polyline:: Polyline () {
+// MyPolyline define
+MyPolyline:: MyPolyline () {
     attributes.push_back(new Fill);
     attributes.push_back(new Fill_opacity);
     attributes.push_back(new Stroke);
@@ -484,25 +484,25 @@ Polyline:: Polyline () {
     attributes.push_back(new Stroke_opacity);
 }
 
-Polyline:: Polyline (const Polyline& p) {
-    Polyline();
+MyPolyline:: MyPolyline (const MyPolyline& p) {
+    MyPolyline();
     this->attributes = p.attributes;
 }
 
-Polyline& Polyline:: operator= (const Polyline& p) {
+MyPolyline& MyPolyline:: operator= (const MyPolyline& p) {
     if (this == &p)
         return *this;
     this->attributes = p.attributes;
     return *this;
 }
 
-void Polyline:: what_is_this() {
-    std::cout << "This is a Polyline " << '\n';
+void MyPolyline:: what_is_this() {
+    std::cout << "This is a MyPolyline " << '\n';
     Shape::what_is_this();
 }
 // - - - - - - -
-// Polygon define
-Polygon:: Polygon () {
+// MyPolygon define
+MyPolygon:: MyPolygon () {
     attributes.push_back(new Fill);
     attributes.push_back(new Fill_opacity);
     attributes.push_back(new Stroke);
@@ -510,27 +510,27 @@ Polygon:: Polygon () {
     attributes.push_back(new Stroke_opacity);
 }
 
-Polygon:: Polygon (const Polygon& p) {
-    Polygon();
+MyPolygon:: MyPolygon (const MyPolygon& p) {
+    MyPolygon();
     this->attributes = p.attributes;
 }
 
-Polygon& Polygon:: operator= (const Polygon& p) {
+MyPolygon& MyPolygon:: operator= (const MyPolygon& p) {
     if (this == &p)
         return *this;
     this->attributes = p.attributes;
     return *this;
 }
 
-void Polygon:: what_is_this() {
-    std::cout << "This is a Polygon " << '\n';
+void MyPolygon:: what_is_this() {
+    std::cout << "This is a MyPolygon " << '\n';
     Shape::what_is_this();
 }
 // - - - - - - -
-// Text define
+// MyText define
 
-void Text:: what_is_this() {
-    std::cout << "This is a Text " << '\n';
+void MyText:: what_is_this() {
+    std::cout << "This is a MyText " << '\n';
     Shape::what_is_this();
 }
 // - - - - - - 
@@ -580,17 +580,17 @@ void project:: inputFromFile(std::vector<Shape*> &_shape, std::string filename, 
         if (stmp == "line")
             nw = new Line;
         else if (stmp == "polyline")
-            nw = new Polyline;
+            nw = new MyPolyline;
         else if (stmp == "polygon")
-            nw = new Polygon;
+            nw = new MyPolygon;
         else if (stmp == "rect")
-            nw = new Rectangle;
+            nw = new MyRectangle;
         else if (stmp == "circle")
-            nw = new Circle;
+            nw = new MyCircle;
         else if (stmp == "ellipse")
-            nw = new Ellipse;
+            nw = new MyEllipse;
         else if (stmp == "text")
-            nw = new Text;
+            nw = new MyText;
         /* else if (stmp == "g") */
             /* nw = new Group; */
         /* else if (stmp == "path") */

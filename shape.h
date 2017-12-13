@@ -306,7 +306,7 @@ public:
     void what_is_this();
 };
 
-class Rectangle : public Shape{
+class MyRectangle : public Shape{
 private:
     // p
     // width, height
@@ -317,13 +317,13 @@ private:
     Type height;
     // transform
 public:
-    Rectangle ();
-    Rectangle (const Rectangle& r);
-    Rectangle& operator= (const Rectangle& r);
+    MyRectangle ();
+    MyRectangle (const MyRectangle& r);
+    MyRectangle& operator= (const MyRectangle& r);
     void what_is_this();
 };
 
-class Circle : public Shape{
+class MyCircle : public Shape{
 private:
     // c
     // r
@@ -333,13 +333,13 @@ private:
     Type r;
     // transform
 public:
-    Circle ();
-    Circle (const Circle& c);
-    Circle& operator= (const Circle& c);
+    MyCircle ();
+    MyCircle (const MyCircle& c);
+    MyCircle& operator= (const MyCircle& c);
     void what_is_this();
 };
 
-class Ellipse : public Shape{
+class MyEllipse : public Shape{
 private:
     // c
     // rx, ry
@@ -350,13 +350,13 @@ private:
     Type ry;
     // transform
 public:
-    Ellipse ();
-    Ellipse (const Ellipse& e);
-    Ellipse& operator= (const Ellipse& e);
+    MyEllipse ();
+    MyEllipse (const MyEllipse& e);
+    MyEllipse& operator= (const MyEllipse& e);
     void what_is_this();
 };
 
-class Polyline : public Shape{
+class MyPolyline : public Shape{
 private:
     // vector<MyPoint> points
     // stroke, fill
@@ -364,13 +364,13 @@ private:
     std::vector<MyPoint> points;
     // transform
 public:
-    Polyline ();
-    Polyline (const Polyline& p);
-    Polyline& operator= (const Polyline& p);
+    MyPolyline ();
+    MyPolyline (const MyPolyline& p);
+    MyPolyline& operator= (const MyPolyline& p);
     void what_is_this();
 };
 
-class Polygon : public Shape{
+class MyPolygon : public Shape{
 private:
     // vector<MyPoint> points
     // stroke, fill
@@ -378,13 +378,13 @@ private:
     std::vector<MyPoint> points;
     // transform
 public:  
-    Polygon ();
-    Polygon (const Polygon& p);
-    Polygon& operator= (const Polygon& p);
+    MyPolygon ();
+    MyPolygon (const MyPolygon& p);
+    MyPolygon& operator= (const MyPolygon& p);
     void what_is_this();
 };
 
-class Text : public Shape {
+class MyText : public Shape {
 
 public:
 
