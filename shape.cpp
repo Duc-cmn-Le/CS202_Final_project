@@ -190,7 +190,7 @@ std::string Fill:: getName() {
 }
 
 void Fill:: setValue(char* attr_value) {
-    this->value = etc::atoc(attr_value);
+    this->value = project::atoc(attr_value);
 }
 
 void Fill:: what_is_this() {
@@ -216,7 +216,7 @@ std::string Stroke:: getName() {
 }
 
 void Stroke:: setValue(char* attr_value) {
-    this->value = etc::atoc(attr_value);
+    this->value = project::atoc(attr_value);
 }
 
 void Stroke:: what_is_this() {
@@ -278,53 +278,38 @@ void Point:: set_point (int x, int y) {
 // - - - - - - -
 // Shape define
 Shape& Shape:: operator= (const Shape& s) {
-    this->stroke = s.stroke;
-    this->fill = s.fill;
-    this->stroke_width = s.stroke_width;
-    this->stroke_opacity = s.stroke_opacity;
-    this->fill_opacity = s.fill_opacity;
     return *this;
 }
 
-Stroke Shape:: get_stroke () {
-    return stroke;
-}
+/* Color Shape:: get_stroke () { */
+/*     for (int i=0, size=attributes.size(); i < size; i++) */
+/*         if (attributes[i]->getName() == "stroke") */
+/*             return attributes[i]->getValue(); */
+/* } */
 
-Fill Shape:: get_fill () {
-    return fill;
-}
+/* Color Shape:: get_fill () { */
+/*     for (int i=0, size=attributes.size(); i < size; i++) */
+/*         if (attributes[i]->getName() == "fill") */
+/*             return attributes[i]->getValue(); */
+/* } */
 
-Stroke_width Shape:: get_stroke_width () {
-    return stroke_width;
-}
+/* int Shape:: get_stroke_width () { */
+/*     for (int i=0, size=attributes.size(); i < size; i++) */
+/*         if (attributes[i]->getName() == "stroke-width") */
+/*             return attributes[i]->getValue(); */
+/* } */
 
-Stroke_opacity Shape:: get_stroke_opacity () {
-    return stroke_opacity;
-}
+/* double Shape:: get_stroke_opacity () { */
+/*     for (int i=0, size=attributes.size(); i < size; i++) */
+/*         if (attributes[i]->getName() == "stroke-opacity") */
+/*             return attributes[i]->getValue(); */
+/* } */
 
-Fill_opacity Shape:: get_fill_opacity () {
-    return fill_opacity;
-}
-
-void Shape:: set_stroke (Stroke stroke) {
-    this->stroke = stroke;
-}
-
-void Shape:: set_fill (Fill fill) {
-    this->fill = fill;
-}
-
-void Shape:: set_stroke_width (Stroke_width stroke_width) {
-    this->stroke_width = stroke_width;
-}
-
-void Shape:: set_stroke_opacity (Stroke_opacity stroke_opacity) {
-    this->stroke_opacity = stroke_opacity;
-}
-
-void Shape:: set_fill_opacity (Fill_opacity fill_opacity) {
-    this->fill_opacity = fill_opacity;
-}
+/* double Shape:: get_fill_opacity () { */
+/*     for (int i=0, size=attributes.size(); i < size; i++) */
+/*         if (attributes[i]->getName() == "fill-opacity") */
+/*             return attributes[i]->getValue(); */
+/* } */
 
 void Shape:: setAttribute(char* attr_name, char* attr_value) {
     int size = this->attributes.size();
@@ -360,22 +345,12 @@ Line:: Line () {
 
 Line:: Line (const Line& l) {
     Line();
-    this->p1 = l.p1;
-    this->p2 = l.p2;
-    this->stroke = l.stroke;
-    this->stroke_width = l.stroke_width;
-    this->stroke_opacity = l.stroke_opacity;
     this->attributes = l.attributes;
 }
 
 Line& Line:: operator= (const Line& l) {
     if (this == &l) 
         return *this;
-    this->p1 = l.p1;
-    this->p2 = l.p2;
-    this->stroke = l.stroke;
-    this->stroke_width = l.stroke_width;
-    this->stroke_opacity = l.stroke_opacity;
     this->attributes = l.attributes;
     return *this;
 }
@@ -400,28 +375,12 @@ Rectangle:: Rectangle () {
 
 Rectangle:: Rectangle (const Rectangle& r) {
     Rectangle();
-    this->p = r.p;
-    this->width = r.width;
-    this->height = r.height;
-    this->stroke = r.stroke;
-    this->fill = r.fill;
-    this->stroke_width = r.stroke_width;
-    this->stroke_opacity = r.stroke_opacity;
-    this->fill_opacity = r.fill_opacity;
     this->attributes = r.attributes;
 }
 
 Rectangle& Rectangle:: operator= (const Rectangle& r) {
     if (this == &r) 
         return *this;
-    this->p = r.p;
-    this->width = r.width;
-    this->height = r.height;
-    this->stroke = r.stroke;
-    this->fill = r.fill;
-    this->stroke_width = r.stroke_width;
-    this->stroke_opacity = r.stroke_opacity;
-    this->fill_opacity = r.fill_opacity;
     this->attributes = r.attributes;
     return *this;
 }
@@ -445,26 +404,12 @@ Circle:: Circle () {
 
 Circle:: Circle (const Circle& c) {
     Circle();
-    this->c = c.c;
-    this->r = c.r;
-    this->stroke = c.stroke;
-    this->fill = c.fill;
-    this->stroke_width = c.stroke_width;
-    this->stroke_opacity = c.stroke_opacity;
-    this->fill_opacity = c.fill_opacity;
     this->attributes = c.attributes;
 }
 
 Circle& Circle:: operator= (const Circle& c) {
     if (this == &c) 
         return *this;
-    this->c = c.c;
-    this->r = c.r;
-    this->stroke = c.stroke;
-    this->fill = c.fill;
-    this->stroke_width = c.stroke_width;
-    this->stroke_opacity = c.stroke_opacity;
-    this->fill_opacity = c.fill_opacity;
     this->attributes = c.attributes;
     return *this;
 }
@@ -489,28 +434,12 @@ Ellipse:: Ellipse () {
 
 Ellipse:: Ellipse (const Ellipse& e) {
     Ellipse();
-    this->c = e.c;
-    this->rx = e.rx;
-    this->ry = e.ry;
-    this->stroke = e.stroke;
-    this->fill = e.fill;
-    this->stroke_width = e.stroke_width;
-    this->stroke_opacity = e.stroke_opacity;
-    this->fill_opacity = e.fill_opacity;
     this->attributes = e.attributes;
 }
 
 Ellipse& Ellipse:: operator= (const Ellipse& e) {
     if (this == &e)
         return *this;
-    this->c = e.c;
-    this->rx = e.rx;
-    this->ry = e.ry;
-    this->stroke = e.stroke;
-    this->fill = e.fill;
-    this->stroke_width = e.stroke_width;
-    this->stroke_opacity = e.stroke_opacity;
-    this->fill_opacity = e.fill_opacity;
     this->attributes = e.attributes;
     return *this;
 }
@@ -531,24 +460,12 @@ Polyline:: Polyline () {
 
 Polyline:: Polyline (const Polyline& p) {
     Polyline();
-    this->points = p.points;
-    this->stroke = p.stroke;
-    this->fill = p.fill;
-    this->stroke_width = p.stroke_width;
-    this->stroke_opacity = p.stroke_opacity;
-    this->fill_opacity = p.fill_opacity;
     this->attributes = p.attributes;
 }
 
 Polyline& Polyline:: operator= (const Polyline& p) {
     if (this == &p)
         return *this;
-    this->points = p.points;
-    this->stroke = p.stroke;
-    this->fill = p.fill;
-    this->stroke_width = p.stroke_width;
-    this->stroke_opacity = p.stroke_opacity;
-    this->fill_opacity = p.fill_opacity;
     this->attributes = p.attributes;
     return *this;
 }
@@ -569,24 +486,12 @@ Polygon:: Polygon () {
 
 Polygon:: Polygon (const Polygon& p) {
     Polygon();
-    this->points = p.points;
-    this->stroke = p.stroke;
-    this->fill = p.fill;
-    this->stroke_width = p.stroke_width;
-    this->stroke_opacity = p.stroke_opacity;
-    this->fill_opacity = p.fill_opacity;
     this->attributes = p.attributes;
 }
 
 Polygon& Polygon:: operator= (const Polygon& p) {
     if (this == &p)
         return *this;
-    this->points = p.points;
-    this->stroke = p.stroke;
-    this->fill = p.fill;
-    this->stroke_width = p.stroke_width;
-    this->stroke_opacity = p.stroke_opacity;
-    this->fill_opacity = p.fill_opacity;
     this->attributes = p.attributes;
     return *this;
 }
@@ -617,8 +522,8 @@ void Group:: what_is_this() {
     Shape::what_is_this();
 }
 // - - - - - - 
-// etc define
-Color etc::atoc(char* c) {
+// project define
+Color project::atoc(char* c) {
     int t[3] = {0, 0, 0}, j = 0;
     for (int i=0; i < 3; i++) {
         while (c[j] < '0' || c[j] > '9')
@@ -630,8 +535,7 @@ Color etc::atoc(char* c) {
     }
     return Color(t[0], t[1], t[2]);
 }
-// - - - - - - - 
-void inputFromFile(std::vector<Shape*> &_shape, std::string filename)
+void project:: inputFromFile(std::vector<Shape*> &_shape, std::string filename)
 {
     //cout << "Parsing the file ......." << endl;
     rapidxml::xml_document<> doc;
@@ -664,6 +568,7 @@ void inputFromFile(std::vector<Shape*> &_shape, std::string filename)
             /* nw = new Group; */
         /* else if (stmp == "path") */
             /* nw = new Path; */
+
         if (nw != NULL) 
         {
             nw->input(object_node);
