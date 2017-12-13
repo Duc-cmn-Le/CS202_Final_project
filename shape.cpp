@@ -1,13 +1,13 @@
 #include "shape.h"
-// Color define 
+// MyColor define 
 
-Color:: Color() : r(0), g(0), b(0) {}
+MyColor:: MyColor() : r(0), g(0), b(0) {}
 
-Color:: Color(int r, int g, int b) : r(r), g(g), b(b) {}
+MyColor:: MyColor(int r, int g, int b) : r(r), g(g), b(b) {}
 
-Color:: Color(const Color &C) : r(C.r), g(C.g), b(C.b) {}
+MyColor:: MyColor(const MyColor &C) : r(C.r), g(C.g), b(C.b) {}
 
-std::ostream& operator<< (std::ostream& os, const Color& c) {
+std::ostream& operator<< (std::ostream& os, const MyColor& c) {
     os << "rgb(" << c.r << ", " << c.g << ", " << c.b << ")";
     return os;
 }
@@ -15,8 +15,8 @@ std::ostream& operator<< (std::ostream& os, const Color& c) {
 // Shapedata define
 Shapedata:: Shapedata() {
     _x = _y = _x1 = _x2 = _y1 = _y2 = _cx = _cy = _r = _rx = _ry = _height = _width = _stroke_width = 0;
-    _stroke = Color(0, 0, 0); 
-    _fill = Color(255, 255, 255);
+    _stroke = MyColor(0, 0, 0); 
+    _fill = MyColor(255, 255, 255);
     _stroke_opacity = 1; 
     _fill_opacity = 1;
 }
@@ -289,29 +289,29 @@ void Stroke_opacity:: what_is_this() {
     std::cout << "stroke-opacity=" << value << ' ';
 }
 // - - - - - - 
-// Point define
-Point:: Point () {
+// MyPoint define
+MyPoint:: MyPoint () {
     x = 0; 
     y = 0;
 }
 
-Point:: Point (int x, int y) {
+MyPoint:: MyPoint (int x, int y) {
     this->x = x;
     this->y = y;
 }
 
-Point:: Point (const Point& p) {
+MyPoint:: MyPoint (const MyPoint& p) {
     this->x = p.x;
     this->y = p.y;
 }
 
-Point& Point:: operator= (const Point& p) {
+MyPoint& MyPoint:: operator= (const MyPoint& p) {
     this->x = p.x;
     this->y = p.y;
     return *this;
 }
 
-void Point:: set_point (int x, int y) {
+void MyPoint:: set_point (int x, int y) {
     this->x = x;
     this->y = y;
 }
@@ -549,7 +549,7 @@ void Group:: what_is_this() {
 }
 // - - - - - - 
 // project define
-Color project::atoc(char* c) {
+MyColor project::atoc(char* c) {
     int t[3] = {0, 0, 0}, j = 0;
     for (int i=0; i < 3; i++) {
         while (c[j] < '0' || c[j] > '9')
@@ -559,7 +559,7 @@ Color project::atoc(char* c) {
             j++;
         }
     }
-    return Color(t[0], t[1], t[2]);
+    return MyColor(t[0], t[1], t[2]);
 }
 void project:: inputFromFile(std::vector<Shape*> &_shape, std::string filename, Database &data_system)
 {

@@ -9,22 +9,22 @@
 
 typedef float Type;
 
-class Color{
+class MyColor{
 private:
     int r, g, b;
 public:
-    Color ();
-    Color (int r, int g, int b);
-    Color (const Color &C);
-    friend std::ostream& operator<< (std::ostream& os, const Color& c);
+    MyColor ();
+    MyColor (int r, int g, int b);
+    MyColor (const MyColor &C);
+    friend std::ostream& operator<< (std::ostream& os, const MyColor& c);
 };
 
-std::ostream& operator<< (std::ostream& os, const Color& c);
+std::ostream& operator<< (std::ostream& os, const MyColor& c);
 
 class Shapedata {
 private:
     int _x, _y, _x1, _y1, _x2, _y2, _cx, _cy, _r, _rx, _ry, _height, _width, _stroke_width;
-    Color _stroke, _fill;
+    MyColor _stroke, _fill;
     double _stroke_opacity, _fill_opacity;
 public: 
     Shapedata();
@@ -41,8 +41,8 @@ public:
     int get_ry() { return _ry; }
     int get_height() { return _height; }
     int get_width() { return _width; }
-    Color get_stroke () { return _stroke ; }
-    Color get_fill () { return _fill ; }
+    MyColor get_stroke () { return _stroke ; }
+    MyColor get_fill () { return _fill ; }
     int get_stroke_width () { return _stroke_width ; }
     double get_stroke_opacity () { return _stroke_opacity ; }
     double get_fill_opacity () { return _fill_opacity ; }
@@ -60,8 +60,8 @@ public:
     void set_ry(int t) { _ry = t; }
     void set_height(int t) { _height = t; }
     void set_width(int t) { _width = t; }
-    void set_stroke (Color t) { _stroke  = t; }
-    void set_fill (Color t) { _fill  = t; }
+    void set_stroke (MyColor t) { _stroke  = t; }
+    void set_fill (MyColor t) { _fill  = t; }
     void set_stroke_width (int t) { _stroke_width  = t; }
     void set_stroke_opacity (double t) { _stroke_opacity  = t; }
     void set_fill_opacity (double t) { _fill_opacity  = t; }
@@ -211,11 +211,11 @@ public:
 class Fill : public Attribute {
 private:
 public:
-    Color value;
-    Fill() : value(Color(255, 255, 255)) {}
+    MyColor value;
+    Fill() : value(MyColor(255, 255, 255)) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    Color getValue();
+    MyColor getValue();
     void what_is_this();
 };
 
@@ -233,11 +233,11 @@ public:
 class Stroke : public Attribute {
 private: 
 public:
-    Color value;
-    Stroke() : value(Color(0, 0, 0)) {}
+    MyColor value;
+    Stroke() : value(MyColor(0, 0, 0)) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    Color getValue();
+    MyColor getValue();
     void what_is_this();
 };
 
@@ -264,14 +264,14 @@ public:
 };
 
 
-class Point {
+class MyPoint {
 private:
     int x, y;
 public:
-    Point ();
-    Point (int x, int y);
-    Point (const Point& p);
-    Point& operator= (const Point& p);
+    MyPoint ();
+    MyPoint (int x, int y);
+    MyPoint (const MyPoint& p);
+    MyPoint& operator= (const MyPoint& p);
     void set_point (int x, int y);
 };
 
@@ -297,7 +297,7 @@ private:
     // p1, p2
     // stroke
     // stroke_width, stroke_opacity
-    Point p1, p2; 
+    MyPoint p1, p2; 
     // transform
 public:
     Line ();
@@ -312,7 +312,7 @@ private:
     // width, height
     // stroke, fill
     // stroke_width, stroke_opacity, fill_opacity
-    Point p;
+    MyPoint p;
     Type width;
     Type height;
     // transform
@@ -329,7 +329,7 @@ private:
     // r
     // stroke, fill
     // stroke_width, stroke_opacity, fill_opacity
-    Point c;
+    MyPoint c;
     Type r;
     // transform
 public:
@@ -345,7 +345,7 @@ private:
     // rx, ry
     // stroke, fill
     // stroke_width, stroke_opacity, fill_opacity
-    Point c;
+    MyPoint c;
     Type rx;
     Type ry;
     // transform
@@ -358,10 +358,10 @@ public:
 
 class Polyline : public Shape{
 private:
-    // vector<Point> points
+    // vector<MyPoint> points
     // stroke, fill
     // stroke_width, stroke_opacity, fill_opacity
-    std::vector<Point> points;
+    std::vector<MyPoint> points;
     // transform
 public:
     Polyline ();
@@ -372,10 +372,10 @@ public:
 
 class Polygon : public Shape{
 private:
-    // vector<Point> points
+    // vector<MyPoint> points
     // stroke, fill
     // stroke_width, stroke_opacity, fill_opacity
-    std::vector<Point> points;
+    std::vector<MyPoint> points;
     // transform
 public:  
     Polygon ();
@@ -418,7 +418,7 @@ public:
 };
 
 namespace project{
-    Color atoc(char* c);
+    MyColor atoc(char* c);
     void inputFromFile(std::vector<Shape*> &_shape, std::string filename, Database &data_system);
 }
 
