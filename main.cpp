@@ -1,3 +1,4 @@
+#include "shape.h"
 #include "afxwin.h"
 #include "stdafx.h"
 #include "shape.h"
