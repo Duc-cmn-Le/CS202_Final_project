@@ -68,8 +68,8 @@ public:
     double get_stroke_opacity () { return _stroke_opacity ; }
     double get_fill_opacity () { return _fill_opacity ; }
     std::vector<MyPoint> get_points() { return _points; }
-    int get_font_size(int t) { return _font_size; }
-    std::string get_content(int t) { return _content; }
+    int get_font_size() { return _font_size; }
+    std::string get_content() { return _content; }
 
     void set_x(int t) { _x = t; }
     void set_y(int t) { _y = t; }
