@@ -896,3 +896,8 @@ void project:: inputFromFile(std::vector<Shape*> &_shape, std::string filename, 
     }
     return;
 }
+
+void project::destruct(std::vector<Shape*> &_shape) {
+	for (int i = 0; i < _shape.size(); i++)
+		delete _shape[i];
+}

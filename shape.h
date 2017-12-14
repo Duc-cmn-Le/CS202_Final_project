@@ -110,7 +110,6 @@ private:
 public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    int getValue();
     void what_is_this();
 };
 
@@ -120,7 +119,6 @@ private:
 public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    int getValue();
     void what_is_this();
 };
 
@@ -130,7 +128,6 @@ private:
 public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    int getValue();
     void what_is_this();
 };
 
@@ -140,7 +137,6 @@ private:
 public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    int getValue();
     void what_is_this();
 };
 
@@ -150,7 +146,6 @@ private:
 public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    int getValue();
     void what_is_this();
 };
 
@@ -160,7 +155,6 @@ private:
 public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    int getValue();
     void what_is_this();
 };
 
@@ -170,7 +164,6 @@ private:
 public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    int getValue();
     void what_is_this();
 };
 
@@ -180,7 +173,6 @@ private:
 public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    int getValue();
     void what_is_this();
 };
 
@@ -190,7 +182,6 @@ private:
 public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    int getValue();
     void what_is_this();
 };
 
@@ -200,7 +191,6 @@ private:
 public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    int getValue();
     void what_is_this();
 };
 
@@ -210,7 +200,6 @@ private:
 public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    int getValue();
     void what_is_this();
 };
 
@@ -221,7 +210,6 @@ public:
     Height() : value(0) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    int getValue();
     void what_is_this();
 };
 
@@ -232,7 +220,6 @@ public:
     Width() : value(0) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    int getValue();
     void what_is_this();
 };
 
@@ -243,7 +230,6 @@ public:
     Fill() : value(MyColor(0, 0, 0)) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    MyColor getValue();
     void what_is_this();
 };
 
@@ -254,7 +240,6 @@ public:
     Fill_opacity() : value(1) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    double getValue();
     void what_is_this();
 };
 
@@ -265,7 +250,6 @@ public:
     Stroke() : value(MyColor(255, 255, 255)) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    MyColor getValue();
     void what_is_this();
 };
 
@@ -276,7 +260,6 @@ public:
     Stroke_width() : value(0) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    int getValue();
     void what_is_this();
 };
 
@@ -287,7 +270,6 @@ public:
     Stroke_opacity() : value(1) {}
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    double getValue();
     void what_is_this();
 };
 
@@ -297,7 +279,6 @@ private:
 public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    int getValue();
     void what_is_this();
 };
 
@@ -307,7 +288,6 @@ private:
 public:
     std::string getName();
     void setValue(char* attr_value, Shapedata &data);
-    int getValue();
     void what_is_this();
 };
 
@@ -341,10 +321,6 @@ public:
 
 class MyLine : public Shape{
 private:
-    // p1, p2
-    // stroke
-    // stroke_width, stroke_opacity
-    MyPoint p1, p2; 
     // transform
 public:
     MyLine ();
@@ -356,13 +332,6 @@ public:
 
 class MyRectangle : public Shape{
 private:
-    // p
-    // width, height
-    // stroke, fill
-    // stroke_width, stroke_opacity, fill_opacity
-    MyPoint p;
-    Type width;
-    Type height;
     // transform
 public:
     MyRectangle ();
@@ -374,12 +343,6 @@ public:
 
 class MyCircle : public Shape{
 private:
-    // c
-    // r
-    // stroke, fill
-    // stroke_width, stroke_opacity, fill_opacity
-    MyPoint c;
-    Type r;
     // transform
 public:
     MyCircle ();
@@ -391,13 +354,6 @@ public:
 
 class MyEllipse : public Shape{
 private:
-    // c
-    // rx, ry
-    // stroke, fill
-    // stroke_width, stroke_opacity, fill_opacity
-    MyPoint c;
-    Type rx;
-    Type ry;
     // transform
 public:
     MyEllipse ();
@@ -409,10 +365,6 @@ public:
 
 class MyPolyline : public Shape{
 private:
-    // vector<MyPoint> points
-    // stroke, fill
-    // stroke_width, stroke_opacity, fill_opacity
-    /* std::vector<MyPoint> points; */
     // transform
 public:
     MyPolyline ();
@@ -424,10 +376,6 @@ public:
 
 class MyPolygon : public Shape{
 private:
-    // vector<MyPoint> points
-    // stroke, fill
-    // stroke_width, stroke_opacity, fill_opacity
-    std::vector<MyPoint> points;
     // transform
 public:  
     MyPolygon ();
@@ -478,5 +426,6 @@ public:
 namespace project{
     MyColor atoc(char* c);
     void inputFromFile(std::vector<Shape*> &_shape, std::string filename, Database &data_system);
+	void destruct(std::vector<Shape*> &_shape);
 }
 
